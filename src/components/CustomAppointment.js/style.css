@@ -1,0 +1,36 @@
+/* Default styles for larger screens */
+.rbc-month-header {
+  background-color: rgb(136, 187, 208);
+  color: white;
+  padding: 20px;
+}
+
+.rbc-toolbar {
+  width: 130% !important;
+}
+
+.rbc-time-view,
+.rbc-month-view {
+  width: 130% !important;
+  height: 130% !important;
+}
+
+/* Media query for screens with a maximum width of 768px (adjust as needed) */
+@media (max-width: 768px) {
+  .rbc-month-header {
+    padding: 10px;
+    /* Reduce padding for smaller screens */
+  }
+
+  .rbc-toolbar {
+    width: 100% !important;
+    /* Full width for smaller screens */
+  }
+
+  .rbc-time-view,
+  .rbc-month-view {
+    width: 100% !important;
+    height: auto !important;
+    /* Adjust height as needed for smaller screens */
+  }
+}

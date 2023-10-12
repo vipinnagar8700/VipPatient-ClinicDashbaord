@@ -1,0 +1,13 @@
+/* Custom CSS for aligning messages */
+.receiver {
+    text-align: left;
+    /* Add other styles for receiver messages */
+    align-items: start;
+}
+
+.sender {
+    text-align: right;
+    align-items: end;
+    color: rgba(14, 168, 42, 0.662);
+    /* Add other styles for sender messages */
+}
