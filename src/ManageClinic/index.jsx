@@ -21,14 +21,16 @@ import AppointmentType from './AppoitnmentType';
 import Sidebar from '@layout/Sidebar';
 import Panel from '@layout/Panel';
 import ClinicUserAvalibility from './ClinicUserAvalibility';
-
+import { useSnackbar } from 'notistack';
+import Url from 'url/Allurl';
 
 
 const ManageClinic = ({ type }) => {
+    const { enqueueSnackbar } = useSnackbar();
 
     const navigate = useNavigate();
     const [value, setValue] = useState('1');
-    const [count,setCount] = useState(0)
+    const [count, setCount] = useState(0)
 
     const handleChangeTab = (event, newValue) => {
         setValue(newValue);
@@ -68,163 +70,182 @@ const ManageClinic = ({ type }) => {
 
             result.then((data) => {
                 console.log(data, "Data Updated Successfully");
-                alert(data.message);
+                enqueueSnackbar(data.message, {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
                 setCount(count + 1)
                 // navigate('/dashboard_a'); // Make sure to import the 'navigate' function if using React Router or a similar library
             }).catch((error) => {
-                console.error("Error occurred while updating data:", error);
+                // Handle errors (e.g., show an error message)
+                enqueueSnackbar(error, "error to Update data!", {
+                    variant: 'error',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
             });
         } catch (error) {
-            console.error("Error occurred while updating data:", error);
+            enqueueSnackbar(error, "error to Update data!", {
+                variant: 'error',
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right',
+                },
+            });
         }
     };
 
 
     return (
         <>
-        <Sidebar/>
-        <Panel/>
-         <Page title="Manage Clinic">
-            <Widget >
+            <Sidebar />
+            <Panel />
+            <Page title="Manage Clinic">
+                <Widget >
 
-                <TabContext value={value}>
-                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                        <TabList onChange={handleChangeTab} aria-label="lab API tabs example">
-                            <Tab label="Clinic Information" value="1" />
-                            <Tab label="Clinic User" value="2" />
-                            <Tab label="Security Groups" value="3" />
-                            <Tab label="Clinic User Availability" value="4" />
-                            <Tab label="Secondary Location" value="5" />
-                            <Tab label="Custom Appointment Type" value="6" />
-                        </TabList>
-                    </Box>
-                    <TabPanel value="1">
-                        <Container>
-                            <Grid container spacing={2} mt={2}>
-                                <div className="wrapper">
-                                    <Container>
-                                        <form onSubmit={handleUpdate}>
-                                            <Grid container spacing={2}>
-                                                <Grid item xs={6}>
-                                                    <InputLabel htmlFor="clinicName">Clinic or Company Name</InputLabel>
-                                                    <TextField
-                                                        id="clinicName"
-                                                        size="small"
-                                                        value={editProfile.clinic_name}
-                                                        onChange={(e) => setEditProfile({ ...editProfile, clinic_name: e.target.value })}
-                                                        fullWidth
-                                                    />
-                                                </Grid>
-                                                <Grid item xs={6}>
-                                                    <InputLabel htmlFor="clinicEmail">Clinic Email Address</InputLabel>
-                                                    <TextField
-                                                        id="clinicEmail"
-                                                        size="small"
-                                                        value={editProfile.email}
-                                                        onChange={(e) => setEditProfile({ ...editProfile, email: e.target.value })}
-                                                        fullWidth
-                                                    />
-                                                </Grid>
-                                                <Grid item xs={6}>
-                                                    <InputLabel htmlFor="clinicPhone">Clinic Phone Number</InputLabel>
-                                                    <TextField
-                                                        id="clinicPhone"
-                                                        size="small"
-                                                        value={editProfile.phone}
-                                                        onChange={(e) => setEditProfile({ ...editProfile, phone: e.target.value })}
-                                                        fullWidth
-                                                    />
-                                                </Grid>
-                                                <Grid item xs={6}>
-                                                    <InputLabel htmlFor="clinicTimezone">Default Timezone</InputLabel>
-                                                    <TextField
-                                                        id="clinicTimezone"
-                                                        size="small"
-                                                        value={editProfile.timezone}
-                                                        onChange={(e) => setEditProfile({ ...editProfile, timezone: e.target.value })}
-                                                        fullWidth
-                                                    />
-                                                </Grid>
-                                                <Grid item xs={6}>
-                                                    <InputLabel htmlFor="clinicLogo">Clinic Logo</InputLabel>
-                                                    <Box sx={{ border: '1px solid #C4C4C4', borderRadius: 2, padding: 3 }}>
-                                                        <input
-                                                            type="file"
-                                                            accept="image/*"
-                                                            onChange={(e) => setEditProfile({ ...editProfile, img: e.target.files[0] })}
+                    <TabContext value={value}>
+                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                            <TabList onChange={handleChangeTab} aria-label="lab API tabs example">
+                                <Tab label="Clinic Information" value="1" />
+                                <Tab label="Clinic User" value="2" />
+                                <Tab label="Security Groups" value="3" />
+                                <Tab label="Clinic User Availability" value="4" />
+                                <Tab label="Secondary Location" value="5" />
+                                <Tab label="Custom Appointment Type" value="6" />
+                            </TabList>
+                        </Box>
+                        <TabPanel value="1">
+                            <Container>
+                                <Grid container spacing={2} mt={2}>
+                                    <div className="wrapper">
+                                        <Container>
+                                            <form onSubmit={handleUpdate}>
+                                                <Grid container spacing={2}>
+                                                    <Grid item xs={6}>
+                                                        <InputLabel htmlFor="clinicName">Clinic or Company Name</InputLabel>
+                                                        <TextField
+                                                            id="clinicName"
+                                                            size="small"
+                                                            value={editProfile.clinic_name}
+                                                            onChange={(e) => setEditProfile({ ...editProfile, clinic_name: e.target.value })}
+                                                            fullWidth
                                                         />
-                                                    </Box>
-                                                    
-                                                </Grid>
-                                                <Grid item xs={6}>
-                                                    
-                                                    <Box sx={{ marginTop: 2, width: 140, height: 140 }}>
-                                                        {editProfile.img && (
-                                                            <img
-                                                                style={{ borderRadius: 5, width: '100%', height: '100%', objectFit: 'cover' }}
-                                                                src={`https://medical.studiomyraa.com/public/uploads/images/${editProfile.img}`}
-                                                                alt="Clinic Logo"
+                                                    </Grid>
+                                                    <Grid item xs={6}>
+                                                        <InputLabel htmlFor="clinicEmail">Clinic Email Address</InputLabel>
+                                                        <TextField
+                                                            id="clinicEmail"
+                                                            size="small"
+                                                            value={editProfile.email}
+                                                            onChange={(e) => setEditProfile({ ...editProfile, email: e.target.value })}
+                                                            fullWidth
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={6}>
+                                                        <InputLabel htmlFor="clinicPhone">Clinic Phone Number</InputLabel>
+                                                        <TextField
+                                                            id="clinicPhone"
+                                                            size="small"
+                                                            value={editProfile.phone}
+                                                            onChange={(e) => setEditProfile({ ...editProfile, phone: e.target.value })}
+                                                            fullWidth
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={6}>
+                                                        <InputLabel htmlFor="clinicTimezone">Default Timezone</InputLabel>
+                                                        <TextField
+                                                            id="clinicTimezone"
+                                                            size="small"
+                                                            value={editProfile.timezone}
+                                                            onChange={(e) => setEditProfile({ ...editProfile, timezone: e.target.value })}
+                                                            fullWidth
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={6}>
+                                                        <InputLabel htmlFor="clinicLogo">Clinic Logo</InputLabel>
+                                                        <Box sx={{ border: '1px solid #C4C4C4', borderRadius: 2, padding: 3 }}>
+                                                            <input
+                                                                type="file"
+                                                                accept="image/*"
+                                                                onChange={(e) => setEditProfile({ ...editProfile, img: e.target.files[0] })}
                                                             />
-                                                        )}
-                                                    </Box>
+                                                        </Box>
+
+                                                    </Grid>
+                                                    <Grid item xs={6}>
+
+                                                        <Box sx={{ marginTop: 2, width: 140, height: 140 }}>
+                                                            {editProfile.img && (
+                                                                <img
+                                                                    style={{ borderRadius: 5, width: '100%', height: '100%', objectFit: 'cover' }}
+                                                                    src={`${Url}/public/uploads/images/${editProfile.img}`}
+                                                                    alt="Clinic Logo"
+                                                                />
+                                                            )}
+                                                        </Box>
+                                                    </Grid>
+                                                    <Grid item xs={6}>
+                                                        <button
+                                                            style={{
+                                                                width: '150px',
+                                                                backgroundColor: '#2BAA27',
+                                                                height: '40px',
+                                                                borderRadius: 4,
+                                                                color: 'white',
+                                                                fontWeight: 600
+                                                            }}
+                                                            type="submit"
+                                                            bgcolor="success"
+                                                            variant="contained"
+                                                        >
+                                                            Save Changes
+                                                        </button>
+                                                    </Grid>
                                                 </Grid>
-                                                <Grid item xs={6}>
-                                                    <button
-                                                        style={{
-                                                            width: '150px',
-                                                            backgroundColor: '#2BAA27',
-                                                            height: '40px',
-                                                            borderRadius: 4,
-                                                            color: 'white',
-                                                            fontWeight: 600
-                                                        }}
-                                                        type="submit"
-                                                        bgcolor="success"
-                                                        variant="contained"
-                                                    >
-                                                        Save Changes
-                                                    </button>
-                                                </Grid>
-                                            </Grid>
-                                        </form>
-                                    </Container>
-                                </div>
+                                            </form>
+                                        </Container>
+                                    </div>
+                                </Grid>
+                            </Container>
+                        </TabPanel>
+                        <TabPanel value="2">
+                            <Grid container spacing={2}>
+                                <ClinicUser />
                             </Grid>
-                        </Container>
-                    </TabPanel>
-                    <TabPanel value="2">
-                        <Grid container spacing={2}>
-                            <ClinicUser />
-                        </Grid>
-                    </TabPanel>
-                    <TabPanel value="3">
-                        <Grid container spacing={2}>
-                            <SecurityGroups />
-                        </Grid>
-                    </TabPanel>
-                    <TabPanel value="4">
-                        <Grid container spacing={2}>
-                            <ClinicUserAvalibility />
-                        </Grid>
-                    </TabPanel>
-                    <TabPanel value="5">
-                        <Grid container spacing={2}>
-                            <SecurityLocation/>
-                        </Grid>
-                    </TabPanel>
-                    <TabPanel value="6">
-                        <Grid container spacing={2}>
-                            <AppointmentType />
-                        </Grid>
-                    </TabPanel>
-                </TabContext>
+                        </TabPanel>
+                        <TabPanel value="3">
+                            <Grid container spacing={2}>
+                                <SecurityGroups />
+                            </Grid>
+                        </TabPanel>
+                        <TabPanel value="4">
+                            <Grid container spacing={2}>
+                                <ClinicUserAvalibility />
+                            </Grid>
+                        </TabPanel>
+                        <TabPanel value="5">
+                            <Grid container spacing={2}>
+                                <SecurityLocation />
+                            </Grid>
+                        </TabPanel>
+                        <TabPanel value="6">
+                            <Grid container spacing={2}>
+                                <AppointmentType />
+                            </Grid>
+                        </TabPanel>
+                    </TabContext>
 
 
 
-            </Widget>
-        </Page>
+                </Widget>
+            </Page>
         </>
-       
+
     )
 }
 

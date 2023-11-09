@@ -35,7 +35,7 @@ import { AddPatientapi, CreateNewUser, GetSingleSecondaryLocation, UpdateSeconda
 import { useNavigate, useParams } from 'react-router';
 import Sidebar from '@layout/Sidebar';
 import Panel from '@layout/Panel';
-
+import { useSnackbar } from 'notistack';
 
 
 const schema = yup.object().shape({
@@ -57,7 +57,7 @@ const schema = yup.object().shape({
 const EditSecondaryLoaction = ({ type }) => {
     const [selectedoption, setSelectedoption] = useState('');
 
-
+    const { enqueueSnackbar } = useSnackbar();
     const navigate = useNavigate()
     const { notify } = useNotistack('Your changes have been successfully saved.', 'success');
 
@@ -101,13 +101,32 @@ const EditSecondaryLoaction = ({ type }) => {
             if (PatientAddData) {
                 PatientAddData.then((data) => {
                     console.log(data);
-                    alert("User Successfully Added!")
+                    // alert("User Successfully Added!")
+                    enqueueSnackbar("User Successfully Added!", {
+                        variant: 'success',
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'right',
+                        },
+                    });
                 });
             } else {
-                alert("Api's Error OCCUR");
+                enqueueSnackbar( "error to add data!", {
+                    variant: 'error',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
             }
         } else {
-            alert("Token is missing");
+            enqueueSnackbar( "error to add data!", {
+                variant: 'error',
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right',
+                },
+            });
         }
 
     };
@@ -146,13 +165,24 @@ const EditSecondaryLoaction = ({ type }) => {
 
             result.then((data) => {
                 console.log(data.messege, "thtrtrer;ojgsrdbehx");
-                alert(data.messege);
-                navigate('/ManageClinic/Details')
+                 enqueueSnackbar(data.messege, {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
 
             })
             console.log(result, "Data Updated Successfully");
         } catch (error) {
-            console.error("Error occurred while updating data:", error);
+            enqueueSnackbar(error, "error to Updated data!", {
+                variant: 'error',
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right',
+                },
+            });
         }
     };
 

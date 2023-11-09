@@ -17,6 +17,8 @@ import { SingleProvider } from '@components/Api/AllApi';
 import ProviderDetails from './ProviderDetails';
 import Sidebar from '@layout/Sidebar';
 import Panel from '@layout/Panel';
+import Url from 'url/Allurl';
+
 
 
 
@@ -127,7 +129,7 @@ const ShopOnline = () => {
                                                             component="img"
                                                             alt="green iguana"
                                                             height="240"
-                                                            image={`https://medical.studiomyraa.com/public/uploads/images/${item.img}`}
+                                                            image={`${Url}/public/uploads/images/${item.img}`}
                                                         />
                                                         <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", backgroundColor: "rgba(0,0,0,.4)" }}>
                                                             <Box sx={{ display: "flex", justifyContent: "space-between", p: 2 }}>

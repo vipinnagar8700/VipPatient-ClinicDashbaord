@@ -7,6 +7,7 @@ import { useFormik } from "formik";
 import * as yup from 'yup';
 import DropFiles from '@components/DropFiles';
 import Btn from '@ui/Btn';
+import { useSnackbar } from 'notistack';
 import CustomSelect from '@ui/Select';
 import DateInput from '@components/MaskedInputs/Date';
 import Phone from '@components/MaskedInputs/Phone';
@@ -50,7 +51,7 @@ const schema = yup.object().shape({
 const AddSecondaryLoaction = ({ type }) => {
     const [selectedMenuItem, setSelectedMenuItem] = useState('');
 const navigate = useNavigate()
-
+const { enqueueSnackbar } = useSnackbar();
 
     const { notify } = useNotistack('Your changes have been successfully saved.', 'success');
 
@@ -80,14 +81,31 @@ const navigate = useNavigate()
             if (PatientAddData) {
                 PatientAddData.then((data) => {
                     console.log(data.messege);
-                    alert(data.messege)
-                    navigate('/ManageClinic/Details')
+                    enqueueSnackbar(data.messege, {
+                        variant: 'success',
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'right',
+                        },
+                    });
                 });
             } else {
-                alert("Api's Error OCCUR");
+                enqueueSnackbar( "error to add data!", {
+                    variant: 'error',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
             }
         } else {
-            alert("Token is missing");
+            enqueueSnackbar( "error to add data!", {
+                variant: 'error',
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right',
+                },
+            });
         }
 
     };

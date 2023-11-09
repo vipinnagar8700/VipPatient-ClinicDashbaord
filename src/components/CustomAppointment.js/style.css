@@ -6,19 +6,20 @@
 }
 
 .rbc-toolbar {
-  width: 130% !important;
+  width: 100% !important;
 }
 
 .rbc-time-view,
 .rbc-month-view {
-  width: 130% !important;
-  height: 130% !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 /* Media query for screens with a maximum width of 768px (adjust as needed) */
 @media (max-width: 768px) {
   .rbc-month-header {
     padding: 10px;
+    
     /* Reduce padding for smaller screens */
   }
 
@@ -27,10 +28,28 @@
     /* Full width for smaller screens */
   }
 
+
+ 
   .rbc-time-view,
   .rbc-month-view {
     width: 100% !important;
     height: auto !important;
     /* Adjust height as needed for smaller screens */
   }
+}
+
+
+
+
+@media(max-width:768px){
+  .custom_cal .rbc-row.rbc-time-header-cell {
+    min-height: unset;flex-wrap: wrap;
+} .custom_cal .rbc-row.rbc-time-header-cell div {
+  width: 50%;
+  flex: auto;
+  min-height: auto !important;
+  overflow: auto !important;
+  padding: 10px;
+  border-left: 1px solid #ddd !important;
+}
 }

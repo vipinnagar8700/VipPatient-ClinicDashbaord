@@ -19,10 +19,12 @@ import useNotistack from '@hooks/useNotistack';
 import { ProfileApi, UpdateProfileData } from '@components/Api/AllApi';
 import LabeledFormInput from '@ui/LabeledFormInput';
 import { useNavigate } from 'react-router-dom';
-
+import { useSnackbar } from 'notistack';
+import Url from 'url/Allurl';
 
 
 const Form = ({ type }) => {
+    const { enqueueSnackbar } = useSnackbar();
     const navigate = useNavigate();
     const [selectedOption, setSelectedOption] = useState('');
 
@@ -76,14 +78,28 @@ const Form = ({ type }) => {
 
             result.then((data) => {
                 console.log(data, "thtrtrer;ojgsrdbehx");
-                alert(data.message);
-                navigate('/Clinic-Dashboard')
+                enqueueSnackbar(data.message, {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
+
+
+                window.location.reload()
 
             })
             console.log(result, "Data Updated Successfully");
             //   history.push("/dashboard_a");
         } catch (error) {
-            console.error("Error occurred while updating data:", error);
+            enqueueSnackbar(error, "error to Updated data!", {
+                variant: 'error',
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right',
+                },
+            });
         }
     };
 
@@ -294,7 +310,7 @@ const Form = ({ type }) => {
                                 {editProfile.img && (
                                     <img
                                         style={{ borderRadius: 5, width: '100%', height: '100%', objectFit: 'cover' }}
-                                        src={`https://medical.studiomyraa.com/public/uploads/images/${editProfile.img}`}
+                                        src={`${Url}/public/uploads/images/${editProfile.img}`}
                                         alt="Clinic Logo"
                                     />
                                 )}
@@ -320,7 +336,7 @@ const Form = ({ type }) => {
                                     editProfile.signature && (
                                         <img
                                             style={{ borderRadius: 5, width: '100%', height: '100%', objectFit: 'cover' }}
-                                            src={`https://medical.studiomyraa.com/public/uploads/images/${editProfile.signature}`}
+                                            src={`${Url}/public/uploads/images/${editProfile.signature}`}
                                             alt="Clinic Logo"
                                         />
                                     )

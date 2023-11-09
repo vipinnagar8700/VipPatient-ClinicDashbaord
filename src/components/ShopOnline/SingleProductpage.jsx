@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import ProviderDetails from './ProviderDetails';
 import Sidebar from '@layout/Sidebar';
 import Panel from '@layout/Panel';
+import Url from 'url/Allurl';
 
 const SingleProductpage = () => {
 
@@ -88,7 +89,7 @@ const SingleProductpage = () => {
                                         component="img"
                                         alt="green iguana"
                                         height="440"
-                                        image={`https://medical.studiomyraa.com/public/uploads/images/${singleProduct.img}`}
+                                        image={`${Url}/public/uploads/images/${singleProduct.img}`}
                                     />
 
                                 </Card>

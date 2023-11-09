@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import { AddSecurityGroup, GetBilling, GetBillingCancel, GettSecurityData, UpdateSecurity, deleteSecurity, editSecurityData } from '@components/Api/AllApi';
 import { Grid, Stack, TextField, InputLabel, Box } from '@mui/material';
-
+import { useSnackbar } from 'notistack';
 
 
 
@@ -33,6 +33,7 @@ const Style = {
 
 
 const SecurityGroups = () => {
+    const { enqueueSnackbar } = useSnackbar();
     const [Sec, setSec] = useState(false)
     const [selectedTab, setSelectedTab] = useState('');
     const [openModal, setOpenModal] = useState(false);
@@ -69,9 +70,9 @@ const SecurityGroups = () => {
     };
     console.log(Sec, "AHGFSXDCFVGBHJNKMLJHGFDSDFGVHBNJ")
 
-  let name = Sec &&  Sec?.name;
-  console.log(name,"KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKk")
-  let id = Sec && Sec?.id;
+    let name = Sec && Sec?.name;
+    console.log(name, "KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKk")
+    let id = Sec && Sec?.id;
 
 
     useEffect(() => {
@@ -175,48 +176,84 @@ const SecurityGroups = () => {
         setSubject(event.target.value);
     };
 
-    const handleSendMessage = () => {
+    const handleSendMessage = (e) => {
+        e.preventDefault()
         AddSecurityGroup(subject)
             .then((result) => {
                 // Handle the result, if needed
                 console.log('API response:', result);
-                alert(result.messege)
+                // alert(result.messege)
+                enqueueSnackbar(result.messege, {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
                 setCount(count + 1)
             })
-            .catch((error) => console.log('error', error));
+            .catch((error) => {
+                // Handle errors (e.g., show an error message)
+                enqueueSnackbar(error, "error to Add data!", {
+                    variant: 'error',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
+            });
     };
 
 
     const handleDelete = (id) => {
         let DeleteData = deleteSecurity(id)
-       
+
         if (DeleteData) {
             DeleteData.then((result) => {
                 // Handle the result if needed (e.g., show a success message)
                 console.log(result);
-                alert("Data Successfully Deleted!")
+                enqueueSnackbar("Data Successfully Deleted!", {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
                 setCount(count + 1)
             })
                 .catch((error) => {
                     // Handle errors (e.g., show an error message)
-                    console.error('Error deleting data:', error);
+                    enqueueSnackbar(error, "error to Delete data!", {
+                        variant: 'error',
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'right',
+                        },
+                    });
                 });
         }
 
     }
-       
+
     const handleUpdate = (e) => {
 
         e.preventDefault();
 
         try {
-            console.log(id,name,"qqqqqqqqqqqqqqqqqqqqqqqq")
-            const result = UpdateSecurity(id,name
+            console.log(id, name, "qqqqqqqqqqqqqqqqqqqqqqqq")
+            const result = UpdateSecurity(id, name
             );
 
             result.then((data) => {
                 console.log(data, "thtrtrer;ojgsrdbehx");
-                alert(data.messege);
+                // alert(data.messege);
+                enqueueSnackbar(data.messege, {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
                 setCount(count + 1)
                 // Navigate('/dashboard_a')
                 setshowpau(false);
@@ -224,7 +261,13 @@ const SecurityGroups = () => {
             })
             console.log(result, "Data Updated Successfully");
         } catch (error) {
-            console.error("Error occurred while updating data:", error);
+            enqueueSnackbar(error, "error to Updated data!", {
+                variant: 'error',
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right',
+                },
+            });
         }
     };
 
@@ -234,7 +277,7 @@ const SecurityGroups = () => {
         <>
             {
                 showpa &&
-                <Box sx={{ zIndex: "9999999", position: "fixed", top: 0, left: 0, width: "100%", minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center", bgcolor: "rgba(0,0,0,.4)" }}>
+                <Box sx={{ zIndex: "9999999", position: "fixed", top: "-25%", left: 0, width: "100%", minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center", bgcolor: "rgba(0,0,0,.4)" }}>
                     <Box sx={{ minWidth: "500px", maxWidth: "500px", p: 2, bgcolor: "#fff" }}>
 
                         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -274,7 +317,7 @@ const SecurityGroups = () => {
             }
             {
                 showpau &&
-                <Box sx={{ zIndex: "9999999", position: "fixed", top: 0, left: 0, width: "100%", minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center", bgcolor: "rgba(0,0,0,.4)" }}>
+                <Box sx={{ zIndex: "9999999", position: "fixed", top: "-25%", left: 0, width: "100%", minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center", bgcolor: "rgba(0,0,0,.4)" }}>
                     <Box sx={{ minWidth: "500px", maxWidth: "500px", p: 2, bgcolor: "#fff" }}>
 
                         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -290,11 +333,11 @@ const SecurityGroups = () => {
                                     fullWidth
                                     margin="normal"
                                     size='small'
-                                value={name} onChange={(e) => {
-                                    setSec({
-                                        ...Sec, name: e.target.value
-                                    })
-                                }}
+                                    value={name} onChange={(e) => {
+                                        setSec({
+                                            ...Sec, name: e.target.value
+                                        })
+                                    }}
                                 // Add any other props you want to customize the TextField
                                 />
 

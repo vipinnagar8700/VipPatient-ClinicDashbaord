@@ -12,6 +12,7 @@ import { ADDPatientFiles, AddSecurityGroup, DEeletPatientFiles, EDITPatientFiles
 import { Grid, Stack, TextField, InputLabel, Box, Avatar, FormControlLabel, Checkbox } from '@mui/material';
 import PaymentHistory from './PaymentHostory';
 import MostRecentAppointment from './MostRecentAppointment';
+import Url from 'url/Allurl';
 
 
 
@@ -93,7 +94,7 @@ const PatientFiles = () => {
     window.open(imageUrl, '_blank');
   };
 
-  const baseUrl = 'https://medical.studiomyraa.com/public/uploads/images/';
+  const baseUrl = `${Url}/public/uploads/images/`;
 
 
 
@@ -216,7 +217,7 @@ const PatientFiles = () => {
 
     // const isPatientVisibleInt = isVisibleToPatient ? 1 : 0;
 
-    ADDPatientFiles(p_id,names, fileI, isVisibleToPatient).then((response) => {
+    ADDPatientFiles(p_id, names, fileI, isVisibleToPatient).then((response) => {
       console.log('API response:', response.messege);
       alert(response.messege)
       handleCloses()
@@ -344,7 +345,7 @@ const PatientFiles = () => {
                     {PatientSData.length} total  Exiting Files found
                   </Typography>
                   <div className="Order Page">
-                    <DataTableExtensions {...tableData}  export={false} print={false}>
+                    <DataTableExtensions {...tableData} export={false} print={false}>
                       <DataTable noHeader defaultSortField="id" defaultSortAsc={false} pagination highlightOnHover />
                     </DataTableExtensions>
                   </div>

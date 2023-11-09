@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import { ADDClinicShedule, AddSecurityGroup, DeleteCLinicShedule, GEtSingleCliniocShedule, GetAllUSers, GetBilling, GetBillingCancel, GetClinicShedule, GetEmployess, GettSecurityData, UPdateCLincicShedule, UpdateSecurity, deleteSecurity, editSecurityData } from '@components/Api/AllApi';
 import { Grid, Stack, TextField, InputLabel, Box, MenuItem, Select } from '@mui/material';
-
+import { useSnackbar } from 'notistack';
 
 
 
@@ -33,6 +33,7 @@ const Style = {
 
 
 const ClinicUserAvalibility = () => {
+    const { enqueueSnackbar } = useSnackbar();
     const [Sec, setSec] = useState(false)
     const [selectedTab, setSelectedTab] = useState('');
     const [openModal, setOpenModal] = useState(false);
@@ -102,9 +103,10 @@ const ClinicUserAvalibility = () => {
         },
         {
             name: 'Avalibility',
-            selector: row => row.start + row.stop,
+            selector: row => `Start Time${row.start} - Stop Time ${row.start}`,
             sortable: true,
         },
+
 
 
         {
@@ -193,15 +195,44 @@ const ClinicUserAvalibility = () => {
         setStop(event.target.value);
     };
 
-    const handleSendMessage = () => {
-        ADDClinicShedule(DoctorID, Day, Start, Stop)
-            .then((result) => {
-                // Handle the result, if needed
-                console.log('API response:', result);
-                alert(result.messege)
-                setCount(count + 1)
-            })
-            .catch((error) => console.log('error', error));
+    const handleSendMessage = (e) => {
+        e.preventDefault();
+        if (DoctorID && Day && Start && Stop) {
+            // All required fields are filled
+            ADDClinicShedule(DoctorID, Day, Start, Stop)
+                .then((result) => {
+                    console.log('API response:', result);
+                    // alert("Data Save Successfully!");
+                    enqueueSnackbar("Data Successfully Save!", {
+                        variant: 'success',
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'right',
+                        },
+                    });
+                    setCount(count + 1);
+                })
+                .catch((error) => {
+                    // Handle errors (e.g., show an error message)
+                    enqueueSnackbar(error, {
+                        variant: 'error',
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'right',
+                        },
+                    });
+                });
+        } else {
+            // Display an error message or handle the validation as needed
+            // alert('Please fill in all required fields.');
+            enqueueSnackbar("Please fill in all required fields.", {
+                variant: 'error',
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right',
+                },
+            });
+        }
     };
 
 
@@ -209,16 +240,29 @@ const ClinicUserAvalibility = () => {
         let DeleteData = DeleteCLinicShedule(id)
 
         if (DeleteData) {
-            DeleteData.then((result) => {
+            DeleteData.then((data) => {
                 // Handle the result if needed (e.g., show a success message)
-                console.log(result);
-                alert(result)
+                console.log(data?.result);
+                // alert(data?.result)
+                enqueueSnackbar(data?.result, {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
                 setCount(count + 1)
             })
-                .catch((error) => {
-                    // Handle errors (e.g., show an error message)
-                    console.error('Error deleting data:', error);
+            .catch((error) => {
+                // Handle errors (e.g., show an error message)
+                enqueueSnackbar(error, "error to Delete data!", {
+                    variant: 'error',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
                 });
+            });
         }
 
     }
@@ -228,13 +272,20 @@ const ClinicUserAvalibility = () => {
         e.preventDefault();
 
         try {
-            console.log(id,dotw,doctor_id,start,stop)
-            const result = UPdateCLincicShedule(id,dotw,doctor_id,start,stop
+            console.log(id, dotw, doctor_id, start, stop)
+            const result = UPdateCLincicShedule(id, dotw, doctor_id, start, stop
             );
 
             result.then((data) => {
                 console.log(data, "thtrtrer;ojgsrdbehx");
-                alert(data.messege);
+                // alert(data.messege);
+                enqueueSnackbar(data.messege, {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
                 setCount(count + 1)
                 // Navigate('/dashboard_a')
                 setshowpau(false);
@@ -242,7 +293,13 @@ const ClinicUserAvalibility = () => {
             })
             console.log(result, "Data Updated Successfully");
         } catch (error) {
-            console.error("Error occurred while updating data:", error);
+            enqueueSnackbar(error, "error to Delete data!", {
+                variant: 'error',
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right',
+                },
+            });
         }
     };
 
@@ -275,7 +332,7 @@ const ClinicUserAvalibility = () => {
         <>
             {
                 showpa &&
-                <Box sx={{ zIndex: "9999999", position: "fixed", top: 0, left: 0, width: "100%", minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center", bgcolor: "rgba(0,0,0,.4)" }}>
+                <Box sx={{ zIndex: "9999999", position: "fixed", top: "-5%", left: 0, width: "100%", minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center", bgcolor: "rgba(0,0,0,.4)" }}>
                     <Box sx={{ minWidth: "500px", maxWidth: "500px", p: 2, bgcolor: "#fff" }}>
 
                         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -286,7 +343,7 @@ const ClinicUserAvalibility = () => {
                         <Box sx={{ mt: 2 }}>
                             <form>
                                 <InputLabel htmlFor="name">DOTW</InputLabel>
-                                <Select
+                                <Select required
                                     value={Day}
                                     onChange={handleDayChange}
                                     fullWidth
@@ -320,7 +377,7 @@ const ClinicUserAvalibility = () => {
                                     </MenuItem>
                                 </Select>
                                 <InputLabel htmlFor="name">Doctor</InputLabel>
-                                <Select
+                                <Select required
                                     // value={selectedDay}
                                     onChange={handleDoctorIDChange}
                                     fullWidth
@@ -345,7 +402,7 @@ const ClinicUserAvalibility = () => {
 
                                 </Select>
                                 <InputLabel htmlFor="name"> Start Times </InputLabel>
-                                <TextField
+                                <TextField required
                                     variant="outlined"
                                     fullWidth
                                     margin="normal"
@@ -353,10 +410,9 @@ const ClinicUserAvalibility = () => {
                                     type="time"
                                     value={Start}
                                     onChange={handleStartChange}
-                                // Add any other props you want to customize the TextField
                                 />
                                 <InputLabel htmlFor="name"> Stop Times </InputLabel>
-                                <TextField
+                                <TextField required
                                     variant="outlined"
                                     fullWidth
                                     margin="normal"
@@ -364,7 +420,6 @@ const ClinicUserAvalibility = () => {
                                     type="time"
                                     value={Stop}
                                     onChange={handleStopChange}
-                                // Add any other props you want to customize the TextField
                                 />
 
                                 <Grid container>
@@ -386,7 +441,7 @@ const ClinicUserAvalibility = () => {
             }
             {
                 showpau &&
-                <Box sx={{ zIndex: "9999999", position: "fixed", top: 0, left: 0, width: "100%", minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center", bgcolor: "rgba(0,0,0,.4)" }}>
+                <Box sx={{ zIndex: "9999999", position: "fixed", top: "-5%", left: 0, width: "100%", minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center", bgcolor: "rgba(0,0,0,.4)" }}>
                     <Box sx={{ minWidth: "500px", maxWidth: "500px", p: 2, bgcolor: "#fff" }}>
 
                         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -394,7 +449,7 @@ const ClinicUserAvalibility = () => {
                             <Box onClick={handleClosesu} sx={{ fontWeight: 900 }}>x</Box>
                         </Box>
 
-                        <Box sx={{ mt: 2 }}>
+                        <Box sx={{ mt: 1 }}>
                             <form>
                                 <InputLabel htmlFor="name">DOTW</InputLabel>
                                 <Select

@@ -14,6 +14,9 @@ import { LogoutProfile, ProfileApi } from '@components/Api/AllApi';
 import { useEffect } from 'react';
 import { Link, redirect } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import Url from 'url/Allurl';
+
+
 
 const CurrentUser = () => {
     const navigate = useNavigate();
@@ -43,22 +46,31 @@ const CurrentUser = () => {
         if (response && response.message === "Successfully logged out") {
             alert("Successfully Logout!");
 
-            // Remove the token from local storage
-            // localStorage.removeItem("clinic");
+            // Clear local storage
+            localStorage.removeItem("clinic");
+
+            // Clear cookies
+            document.cookie.split(';').forEach(function (cookie) {
+                var name = cookie.split('=')[0].trim();
+                document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            });
+
+            // Navigate to the desired location
             navigate('/');
         } else {
             alert("Logout failed. Please try again.");
         }
+
     };
 
 
     return (
         <ClickAwayListener onClickAway={handleClickAway}>
             <UserWrapper>
-                <img src={`https://medical.studiomyraa.com/public/uploads/images/${ProfileData.img}`} style={{ height: '25px', width: '25px' }} alt="avatar" />
+                <img src={`${Url}/public/uploads/images/${ProfileData?.img}`} style={{ height: '25px', width: '25px' }} alt="avatar" />
                 <div className="info">
-                    <span className="h3">{ProfileData.name} {ProfileData.lname}</span>
-                    <span className="position">{ProfileData.address}</span>
+                    <span className="h3">{ProfileData?.name} {ProfileData?.lname}</span>
+                    <span className="position">{ProfileData?.address}</span>
                     <Menu className={open ? 'visible' : ''}>
                         <button>
                             <Link to="/settings"> <i className="icon icon-circle-user" /> Change user</Link>
@@ -66,7 +78,7 @@ const CurrentUser = () => {
                         <button>
                             <Link to="/settings/ChangePassword"> <i className="icon icon-circle-user" /> Change Password</Link>
                         </button>
-                        
+
                         <button>
                             <i className="icon icon-logout" onClick={Logout} /> Logout
                         </button>

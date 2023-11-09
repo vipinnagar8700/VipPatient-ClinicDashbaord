@@ -10,8 +10,13 @@ import Typography from '@mui/material/Typography';
 import { DeleteTemplate, GetAllTemplate } from '@components/Api/AllApi';
 import Sidebar from '@layout/Sidebar';
 import Panel from '@layout/Panel';
+// components
+import { useSnackbar } from 'notistack';
 
 const DocumentBuilder = () => {
+
+
+    const { enqueueSnackbar } = useSnackbar();
     const [selectedTab, setSelectedTab] = useState('');
     const [openModal, setOpenModal] = useState(false);
     const smallScreen = window.matchMedia('(max-width: 1038.98px)').matches;
@@ -32,17 +37,35 @@ const DocumentBuilder = () => {
 
     const handleDelete = (id) => {
         let DeleteData = DeleteTemplate(id)
-        alert("Data Successfully Deleted!")
+        enqueueSnackbar("Data Successfully Deleted!", {
+            variant: 'success',
+            anchorOrigin: {
+                vertical: 'top',
+                horizontal: 'right',
+            },
+        });
         setCount(count + 1)
         if (DeleteData) {
             DeleteData.then((result) => {
                 // Handle the result if needed (e.g., show a success message)
                 console.log(result);
-                alert("Data Successfully Deleted!")
+                enqueueSnackbar("Data Successfully Deleted!", {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
             })
                 .catch((error) => {
                     // Handle errors (e.g., show an error message)
-                    console.error('Error deleting data:', error);
+                    enqueueSnackbar(error, "error to Delete data!", {
+                        variant: 'error',
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'right',
+                        },
+                    });
                 });
         }
 

@@ -24,6 +24,10 @@
   flex-wrap: nowrap;
   justify-content: space-between;
   padding: 0 2em 2em;
+  top: 57.5%;
+  left: 64.8%;
+  position: absolute;
+  width: 40%;
 }
 
 .participant {
@@ -46,8 +50,7 @@
 
 video {
   width: 100%;
-  max-width: 300px;
+  max-width: 100%;
   display: block;
   margin: 0 auto;
-  border-radius: 6px;
 }

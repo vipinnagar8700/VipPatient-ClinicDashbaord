@@ -5,6 +5,7 @@ import DataTable from 'react-data-table-component';
 import DataTableExtensions from 'react-data-table-component-extensions';
 import 'react-data-table-component-extensions/dist/index.css';
 import Card from '@mui/material/Card';
+import { useSnackbar } from 'notistack';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
@@ -21,7 +22,7 @@ import Sidebar from '@layout/Sidebar';
 import Panel from '@layout/Panel';
 
 const CreateTemplate = ({ initialValue, onChange }) => {
-
+    const { enqueueSnackbar } = useSnackbar();
 
     const navigate = useNavigate()
     const [selectedTab, setSelectedTab] = useState('');
@@ -61,14 +62,31 @@ const CreateTemplate = ({ initialValue, onChange }) => {
             if (productData) {
                 productData.then((data) => {
                     console.log(data.messege);
-                    alert(data.messege)
-                    navigate('/document-Builder')
+                    enqueueSnackbar(data.messege, {
+                        variant: 'success',
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'right',
+                        },
+                    });
                 });
             } else {
-                alert("Api's Error OCCUR");
+                enqueueSnackbar( "error to add data!", {
+                    variant: 'error',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
             }
         } else {
-            alert("Token is missing");
+            enqueueSnackbar( "error to add data!", {
+                variant: 'error',
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right',
+                },
+            });
         }
 
     };

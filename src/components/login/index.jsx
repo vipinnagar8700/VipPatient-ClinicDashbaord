@@ -17,6 +17,7 @@ import { LoginApi } from '@components/Api/AllApi';
 import { useState } from 'react';
 import Cookies from 'js-cookie'; // Import the js-cookie library
 import { useNavigate } from 'react-router';
+import Url from 'url/Allurl';
 
 
 const Login = () => {
@@ -31,7 +32,7 @@ const Login = () => {
     e.preventDefault();
     try {
       // Call the API here using the updated fetch method
-      const res = await fetch("https://medical.studiomyraa.com/api/login_action", {
+      const res = await fetch(`${Url}/api/login_action`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,13 +49,31 @@ const Login = () => {
 
       // Assuming the API response includes information about successful login
       if (data && data.token) {
-        // Save the token in local storage
-        localStorage.setItem("clinic", JSON.stringify(data.user));
-        // Optionally, you can also set the token in a state variable if needed
-        // setToken(data.token);
-        Cookies.set("clinic", data.token, { expires: 7 });
-        alert("Successfully Logged In!");
-        navigate('/Clinic-Dashboard')
+        const userRole = data.user.role;
+
+
+        if (userRole === "clinic_user" || userRole === "clinic_admin") {
+          // Save the token in local storage
+          localStorage.setItem("clinic", JSON.stringify(data.user));
+          // Optionally, you can also set the token in a state variable if needed
+          // setToken(data.token);
+          Cookies.set("clinic", data.token, { expires: 7 });
+          alert("Successfully Logged In as a Clinic!!");
+
+          if (userRole === "clinic_user") {
+            navigate('/Clinic-Dashboard');
+          } else if (userRole === "clinic_admin") {
+            navigate('/Clinic-Dashboard');
+          }
+
+          setTimeout(() => {
+            window.location.reload();
+          }, 500);
+        } else {
+          alert("You do not have the required role to log in!");
+        }
+
+
         // setIsLoggedIn(true); // Update the isLoggedIn state in the parent component
       } else {
         alert("Login failed. Please check your credentials!");

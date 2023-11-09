@@ -10,12 +10,15 @@ import { AllAppointmentDetails, GetAllUSers, GetLocation, GetSingleAppp, GetType
 import './style.css'
 import DoctorPopup from '@components/AppointmentsCalendar/DoctorPopup';
 import Url from 'url/Allurl';
+import { useSnackbar } from 'notistack';
 import Cookies from 'js-cookie';
 
 
 const localizer = momentLocalizer(moment);
 
 export default function MYCalendar() {
+    const { enqueueSnackbar } = useSnackbar();
+
     const [hh, sethh] = useState(false)
     const [hhA, sethhA] = useState(false)
     const [hhB, sethhB] = useState(false)
@@ -152,20 +155,32 @@ export default function MYCalendar() {
             .then((res) => res.json())
             .then((json) => {
                 console.log(json, "anjkhgdchjm");
-                alert(json.messege)
+                enqueueSnackbar(json.messege, {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
                 setCount(count + 1)
                 closePopup()
             })
             .catch((e) =>
-                console.log(e)
-            );
+            enqueueSnackbar(e, "error to Make Appointment!", {
+                variant: 'error',
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right',
+                },
+            })
+            )
 
     };
     const closeModal = () => {
         setIsModalOpen(false);
     };
     return (
-        <div>
+        <div className="custom_cal">
             <div>
                 <button onClick={() => handleViewChange('month')}>Month</button>
                 <button onClick={() => handleViewChange('week')}>Week</button>

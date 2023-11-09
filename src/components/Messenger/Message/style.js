@@ -1,13 +1,13 @@
 import styled from 'styled-components/macro';
-import {dark, breakpoints, flex, fonts, light, textSizes} from '@styles/vars';
+import { dark, breakpoints, flex, fonts, light, textSizes } from '@styles/vars';
 import theme from 'styled-theming';
 
 export const MessageContainer = styled.div`
   margin: ${props => props.sender === 'current' ? '0 24px 0 auto' : '0 auto 0 24px'};
   ${flex.col};
   gap: 8px;
-  max-width: 60%;
-  width: fit-content;
+  max-width: 95%;
+
   padding-bottom: 20px;
 
   .metadata {
@@ -20,9 +20,9 @@ export const MessageContainer = styled.div`
     border-radius: 8px;
     padding: ${props => props.hasAudio ? '20px' : '10px'};
     background-color: ${theme('theme', {
-      light: props => props.sender !== 'current' ? light.bodyBg : light.highlight,
-      dark: props => props.sender !== 'current' ? dark.bodyBg : dark.highlight,
-    })};
+  light: props => props.sender !== 'current' ? light.bodyBg : light.highlight,
+  dark: props => props.sender !== 'current' ? dark.bodyBg : dark.highlight,
+})};
     gap: 10px;
     width: fit-content;
     word-break: break-word;

@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import { AddSecurityGroup, DeleteSecondaryLoaction, GetAllSecurityLocation, GetBilling, GetBillingCancel, GettSecurityData, UpdateSecurity, deleteSecurity, editSecurityData } from '@components/Api/AllApi';
 import { Grid, Stack, TextField, InputLabel, Box } from '@mui/material';
-
+import { useSnackbar } from 'notistack';
 
 
 
@@ -33,6 +33,7 @@ const Style = {
 
 
 const SecurityLocation = () => {
+    const { enqueueSnackbar } = useSnackbar();
     const [Sec, setSec] = useState(false)
     const [selectedTab, setSelectedTab] = useState('');
     const [openModal, setOpenModal] = useState(false);
@@ -77,7 +78,7 @@ const SecurityLocation = () => {
     useEffect(() => {
         const fetchTemplateData = async () => {
             try {
-                const data = await  GetAllSecurityLocation();
+                const data = await GetAllSecurityLocation();
                 console.log(data, "This Is all Billing Data!");
                 setPatientSData(data.result || []);
             } catch (error) {
@@ -111,7 +112,7 @@ const SecurityLocation = () => {
             selector: row => row.address2,
             sortable: true,
         },
-       
+
 
 
         {
@@ -120,7 +121,7 @@ const SecurityLocation = () => {
             cell: (row) => (
                 <>
 
-                    
+
                     <button style={{ width: '110px', backgroundColor: 'skyblue', height: '35px', borderRadius: 4, color: 'white', fontWeight: 600, marginLeft: 2 }}  >
 
                         <Link to={`/ManageClinic/Edit-Secoundary-location/${row.id}`}     >
@@ -194,10 +195,26 @@ const SecurityLocation = () => {
             .then((result) => {
                 // Handle the result, if needed
                 console.log('API response:', result);
-                alert(result.messege)
+                // alert(result.messege)
+                enqueueSnackbar(result.messege, {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
                 setCount(count + 1)
             })
-            .catch((error) => console.log('error', error));
+            .catch((error) => {
+                // Handle errors (e.g., show an error message)
+                enqueueSnackbar(error, "error to add data!", {
+                    variant: 'error',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
+            });
     };
 
 
@@ -208,12 +225,24 @@ const SecurityLocation = () => {
             DeleteData.then((result) => {
                 // Handle the result if needed (e.g., show a success message)
                 console.log(result);
-                alert("Data Successfully Deleted!")
+                enqueueSnackbar("Data Successfully Deleted!", {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
                 setCount(count + 1)
             })
                 .catch((error) => {
                     // Handle errors (e.g., show an error message)
-                    console.error('Error deleting data:', error);
+                    enqueueSnackbar(error, "error to Delete data!", {
+                        variant: 'error',
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'right',
+                        },
+                    });
                 });
         }
 
@@ -230,7 +259,14 @@ const SecurityLocation = () => {
 
             result.then((data) => {
                 console.log(data, "thtrtrer;ojgsrdbehx");
-                alert(data.messege);
+                // alert(data.messege);
+                enqueueSnackbar(data.messege, {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
                 setCount(count + 1)
                 // Navigate('/dashboard_a')
                 setshowpau(false);
@@ -238,7 +274,13 @@ const SecurityLocation = () => {
             })
             console.log(result, "Data Updated Successfully");
         } catch (error) {
-            console.error("Error occurred while updating data:", error);
+            enqueueSnackbar(error, "error to Updated data!", {
+                variant: 'error',
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right',
+                },
+            });
         }
     };
 

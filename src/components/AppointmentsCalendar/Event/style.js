@@ -84,7 +84,7 @@ export const StyledEvent = styled.div`
   .event-title {
     font-size: ${textSizes['14']};
     position: relative;
-    color:green;
+    color:red;
     z-index: 2;
    
 })};

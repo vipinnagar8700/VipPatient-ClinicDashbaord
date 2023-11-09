@@ -9,6 +9,7 @@ import {Tab} from 'react-bootstrap'
 import TabNav from '@ui/TabNav';
 import TabNavItem from '@ui/TabNav/TabNavItem';
 import Form from './Form';
+import { useSnackbar } from 'notistack';
 
 const UserSettings = () => {
     return (

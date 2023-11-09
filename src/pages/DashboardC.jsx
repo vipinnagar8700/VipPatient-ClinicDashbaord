@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { Box } from '@mui/material';
 import Sidebar from '@layout/Sidebar';
 import Panel from '@layout/Panel';
+import MYCalendar from '@components/CustomAppointment.js/Calender';
 
 
 
@@ -35,12 +36,20 @@ const DashboardC = () => {
         <>
             <Sidebar />
             <Panel />
-            <Box title="Appointments" sx={{ display: 'flex', marginTop: 3, gap: 5 }}>
-                <div key="task-list">
+            <Box title="Appointments"  sx={{
+                    margin: 3,
+                    marginTop: '3%',
+                    display: 'flex',
+                    flexWrap: 'wrap',  // Allow items to wrap to the next line
+                    gap: 5,
+                    marginBottom:'5%'
+                    // marginRight: 10
+                }}>
+                <div key="task-list" style={{ flex: '0.2' }}>
                     <TasksList />
                 </div>
-                <div key="task-list">
-                    <PatientCalendar current={currentView} handler={setView} />
+                <div key="calendar" style={{ flex: '1' }}>
+                    <MYCalendar current={currentView} handler={setView} />
                 </div>
 
 

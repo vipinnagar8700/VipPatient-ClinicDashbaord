@@ -5,9 +5,23 @@ import Room from "./Room";
 
 
 
-const VideoChat = ({ user }) => {
-  const [username, setUsername] = useState("");
-  const [roomName, setRoomName] = useState("");
+const VideoChat = ({ user, handleOpen }) => {
+  const { id, clinic_id } = user;
+  console.log(id, clinic_id, "UUUUUUUUUUUUUUUUUUUUUUUUUUUUU")
+  const [username, setUsername] = useState(id);
+  const [roomName, setRoomName] = useState(clinic_id);
+  useEffect(() => {
+    setUsername(id);
+    setRoomName(clinic_id);
+  }, [user]);
+
+
+
+  const getDataforVideoCall = () => {
+
+  }
+
+
   const [room, setRoom] = useState(null);
   const [connecting, setConnecting] = useState(false);
 
@@ -39,6 +53,7 @@ const VideoChat = ({ user }) => {
         .then((room) => {
           setConnecting(false);
           setRoom(room);
+          handleOpen()
         })
         .catch((err) => {
           console.error(err);
@@ -87,6 +102,7 @@ const VideoChat = ({ user }) => {
   } else {
     render = (
       <Lobby
+        handleOpen={handleOpen}
         user={user}
         username={username}
         roomName={roomName}

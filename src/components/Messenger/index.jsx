@@ -4,12 +4,16 @@ import Tab from 'react-bootstrap/Tab';
 import SelectPlaceholder from '@ui/SelectPlaceholder';
 import Main from '@components/Messenger/Main';
 
+
+
 const Messenger = ({ variant, user }) => {
+
+
     return (
         <Tab.Content as={Widget} name="Messenger" mobile={600}>
             {
                 user === '' ?
-                    <SelectPlaceholder text="Select a chart to start messaging" />
+                    <SelectPlaceholder text="Select a patient to start messaging" />
                     :
                     <Main variant={variant} user={user} />
             }

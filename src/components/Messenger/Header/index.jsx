@@ -71,6 +71,11 @@ const VideoChat = ({ user }) => {
     };
 
 
+
+
+
+
+
     return (
         <>
             {
@@ -111,26 +116,19 @@ const VideoChat = ({ user }) => {
                                 height: "100%", // Make the container take up the entire height
                             }}
                         >
+                            < VidocallMain user={user} />
+
                             <Avatar mt={80} sx={{ width: 200, height: 200, marginTop: 10 }} src={`${Url}/public/uploads/images/${user?.img}`} />
                             <Typography variant="h6">{user?.name} {user?.lname}</Typography>
-                            <Typography> Video Call Connecting ...</Typography>
-                            <Stack direction="row" gap={2} sx={{ textAlign: "center", marginTop: 47, marginBottom: 3 }}>
-                                <Avatar>
-                                    <VolumeUpIcon />
-                                </Avatar>
-                                <Avatar>
-                                    <MicOffIcon />
-                                </Avatar>
-                                <Avatar>
-                                    <VideocamIcon />
-                                </Avatar>
+                            {/* <Typography> Video Call Connecting ...</Typography> */}
+                            {/* <Stack direction="row" gap={2} sx={{ textAlign: "center", marginTop: 47, marginBottom: 3 }}>
                                 <Avatar
                                     sx={{ backgroundColor: "red" }}
                                     onClick={handleCloses}
                                 >
                                     <CallEndIcon />
                                 </Avatar>
-                            </Stack>
+                            </Stack> */}
                         </Box>
                     </Box>
                 </Box>
@@ -201,7 +199,7 @@ const VideoChat = ({ user }) => {
             <HeaderContainer>
                 <div className="main">
                     <Avatar src={`${Url}/public/uploads/images/${user?.img}`} />
-                    <h3 className="title">{user?.name}{user?.lname}</h3>
+                    <h3 className="title">{user?.name}  {user?.lname}</h3>
                 </div>
                 <div className="actions">
                     <Stack direction='row' sx={{ alignItems: "center" }} gap={2}>
@@ -222,7 +220,7 @@ const VideoChat = ({ user }) => {
                     </Stack>
                 </div>
             </HeaderContainer>
-            < VidocallMain user={user} />
+            {/* < VidocallMain user={user} handleOpen={handleOpen} /> */}
 
         </>
     );

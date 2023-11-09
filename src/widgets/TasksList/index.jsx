@@ -11,6 +11,7 @@ import Field from '@ui/Field';
 import Grow from '@mui/material/Grow';
 import Collapse from '@mui/material/Collapse';
 // utils
+
 import { useDispatch } from 'react-redux';
 import { addTodo, toggleCollapse } from '@store/features/todos';
 import { tasksOptions } from '@constants/options';
@@ -21,6 +22,7 @@ import Widget from '@components/Widget';
 import WidgetHeader from '@components/Widget/WidgetHeader';
 import { Navbar } from '@components/Widget/style';
 import Btn from '@ui/Btn'
+import { useSnackbar } from 'notistack';
 import TodosLegend from '@components/Todos/TodosLegend';
 import AddForm from '@components/Todos/AddForm';
 import DnDLayout from '@components/Todos/DnDLayout';
@@ -33,11 +35,13 @@ import { InputLabel, TextField, FormControl, MenuItem, Paper, Typography, Select
 import { BookAppointment, GetAllUSers, GetEmployess, GetLocation, GetPatientAppointment, GetTypeAppointment } from '@components/Api/AllApi';
 import Autocomplete from '@mui/material/Autocomplete';
 import Cookies from 'js-cookie';
+import Url from 'url/Allurl';
 const Footer = styled.div`
   padding: 2px 24px 22px 24px;
 `;
 
 const TasksList = () => {
+    const { enqueueSnackbar } = useSnackbar();
     const [open, setOpen] = useState(false);
     const [filteredOptions, setFilteredOptions] = useState([]);
     const [selectedPatientId, setSelectedPatientId] = useState(null);
@@ -108,7 +112,7 @@ const TasksList = () => {
         formdata.append("clinic_location_id", clinicLocation);
         formdata.append("type_id", type);
         formdata.append("start_date", startDate);
-        formdata.append("end_date", startDate);
+        formdata.append("end_date", endDate);
         formdata.append("note", note);
         formdata.append("appointment_color", appointmentColor);
 
@@ -119,11 +123,19 @@ const TasksList = () => {
             redirect: 'follow'
         };
 
-        return fetch("https://medical.studiomyraa.com/api/clinic_appointment", requestOptions)
+        return fetch(`${Url}/api/clinic_appointment`, requestOptions)
             .then((res) => res.json())
             .then((json) => {
                 console.log(json, "anjkhgdchjm");
-                alert(json.messege)
+                // alert()
+                enqueueSnackbar(json.messege, {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
+                window.location.reload()
             })
             .catch((e) => console.log(e));
 
@@ -359,7 +371,7 @@ const TasksList = () => {
 
 
 
-                <button style={{ width: '100%', height: 40, marginTop: 15, backgroundColor: 'skyblue', color: 'white', borderRadius: 4 }}>Create Appointment</button>
+                <button style={{ width: '100%', height: 40, marginTop: 15, backgroundColor: 'green', color: 'white', borderRadius: 4 }}>Create Appointment</button>
 
             </Form>
         </Widget>

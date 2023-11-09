@@ -18,6 +18,10 @@ import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import Sidebar from '@layout/Sidebar';
 import Panel from '@layout/Panel';
+import Url from 'url/Allurl';
+
+
+
 
 const Style = {
     position: 'absolute',
@@ -88,7 +92,7 @@ const DoctorsReviews = () => {
             redirect: 'follow'
         };
 
-        fetch("https://medical.studiomyraa.com/api/get_provider_company", requestOptions)
+        fetch(`${Url}/api/get_provider_company`, requestOptions)
             .then((res) => res.json())
             .then((json) => {
                 console.log(json.result, "This Is Product Data!");

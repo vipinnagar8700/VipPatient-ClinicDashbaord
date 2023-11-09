@@ -14,9 +14,12 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { EditTemplateer, UpdateTemplate } from '@components/Api/AllApi';
 import Sidebar from '@layout/Sidebar';
 import Panel from '@layout/Panel';
+import { useSnackbar } from 'notistack';
 
 
 const EditTemplate = ({ initialValue, onChange }) => {
+
+    const { enqueueSnackbar } = useSnackbar();
 
     const navigate = useNavigate()
     const [Tem, setTem] = useState(false)
@@ -65,13 +68,24 @@ const EditTemplate = ({ initialValue, onChange }) => {
 
             result.then((data) => {
                 console.log(data.messege, "thtrtrer;ojgsrdbehx");
-                alert(data.messege);
-                navigate('/document-Builder')
+                enqueueSnackbar(data.messege, {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
 
             })
             console.log(result, "Data Updated Successfully");
         } catch (error) {
-            console.error("Error occurred while updating data:", error);
+            enqueueSnackbar(error, "error to Updated data!", {
+                variant: 'error',
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right',
+                },
+            });
         }
     };
 

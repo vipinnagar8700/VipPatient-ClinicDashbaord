@@ -49,7 +49,7 @@ const DashboardK = () => {
         let TotalAppointmentRequest = GetAppointmtentREwie()
         if (TotalAppointmentRequest) {
             TotalAppointmentRequest.then((data) => {
-                console.log(data, "  Total AppointmentRequest!")
+                console.log(data, "  Total Appointment Request!")
                 setAppointmentRequestData(data?.result || '')
             })
         }
@@ -63,47 +63,47 @@ const DashboardK = () => {
             <Panel />
             <Page title=" Clinic Dashboard">
                 <Grid container >
-                    <Grid items xs={2} sm={4} md={4}>
+                    <Grid items xs={12} sm={6} md={4}>
                         <div style={{ margin: '4px' }} key="stat-cause">
                             <Statistics data={{ type: 'cause', value: PatientData.length, text: 'Total Active Patients' }} />
                         </div>
                     </Grid>
-                    <Grid items xs={2} sm={4} md={4}>
+                    <Grid items  xs={12} sm={6} md={4}>
                         <div style={{ margin: '4px' }} key="stat-teeth">
-                            <Statistics data={{ type: 'teeth', value: '5', text: 'Today VAlid Certifications' }} />
+                            <Statistics data={{ type: 'teeth', value: '5', text: 'Today Valid Certifications' }} />
                         </div>
                     </Grid>
-                    <Grid items xs={2} sm={4} md={4}>
+                    <Grid items  xs={12} sm={6} md={4}>
                         <div style={{ margin: '4px' }} key="stat-heart">
                             <Statistics data={{ type: 'heart', value: '5', text: 'Certifications Expiring soon' }} />
                         </div>
                     </Grid>
-                    <Grid items xs={2} sm={4} md={4}>
+                    <Grid items  xs={12} sm={6} md={4}>
                         <div style={{ margin: '4px' }} key="stat-cause">
                             <Statistics data={{ type: 'cause', value: '2', text: 'Total Appointments Today' }} />
                         </div>
                     </Grid>
-                    <Grid items xs={2} sm={4} md={4}>
+                    <Grid items  xs={12} sm={6} md={4}>
                         <div style={{ margin: '4px' }} key="stat-teeth">
                             <Statistics data={{ type: 'teeth', value: '0', text: 'Unread Messages' }} />
                         </div>
                     </Grid>
-                    <Grid items xs={2} sm={4} md={4}>
+                    <Grid items  xs={12} sm={6} md={4}>
                         <div style={{ margin: '4px' }} key="stat-heart">
                             <Statistics data={{ type: 'heart', value: '0', text: 'New Tasks' }} />
                         </div>
                     </Grid>
-                    <Grid items xs={2} sm={4} md={4}>
+                    <Grid items  xs={12} sm={6} md={4}>
                         <div style={{ margin: '4px' }} key="stat-heart">
                             <Statistics data={{ type: 'heart', value: '0', text: 'New Appointment Requests' }} />
                         </div>
                     </Grid>
-                    <Grid items xs={2} sm={4} md={4}>
+                    <Grid items  xs={12} sm={6} md={4}>
                         <div style={{ margin: '4px' }} key="stat-heart">
                             <Statistics data={{ type: 'heart', value: '0', text: 'New Appointment Requests' }} />
                         </div>
                     </Grid>
-                    <Grid items xs={2} sm={4} md={4}>
+                    <Grid items  xs={12} sm={6} md={4}>
                         <div style={{ margin: '4px' }} key="stat-heart">
                             <Statistics data={{ type: 'heart', value: AppointmentRequestData.length, text: 'New Appointment Requests' }} />
                         </div>
@@ -111,13 +111,13 @@ const DashboardK = () => {
 
                 </Grid>
                 <Grid container>
-                    <Grid items md={3}>
+                    <Grid items xs={12} sm={6} md={3}>
 
                         <div style={{ margin: '4px' }} key="events-compact">
                             <EventsCompactCalendar />
                         </div>
                     </Grid>
-                    <Grid items md={9}>
+                    <Grid items xs={12} sm={6} md={9}>
 
                         <div style={{ margin: '4px' }} key="health-index">
                             <HealthIndexChart variant="both" />
@@ -125,13 +125,13 @@ const DashboardK = () => {
                     </Grid>
                 </Grid>
                 <Grid container>
-                    <Grid items md={6}>
+                    <Grid items sx={12} md={6}>
 
                         <div style={{ margin: '4px' }} key="events-compact">
                             <ClinicActivity />
                         </div>
                     </Grid>
-                    <Grid items md={6}>
+                    <Grid items sx={12} md={6}>
 
                         <div style={{ margin: '4px' }} key="health-index">
                             <UpcommingAppointment />

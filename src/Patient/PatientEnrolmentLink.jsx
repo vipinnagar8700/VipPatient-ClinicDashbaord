@@ -5,6 +5,7 @@ import { Container, Grid, Button, TextField, InputLabel, Select, MenuItem, Box }
 // components\
 import { useFormik } from "formik";
 import * as yup from 'yup';
+import { useSnackbar } from 'notistack';
 import DropFiles from '@components/DropFiles';
 import Btn from '@ui/Btn';
 import CustomSelect from '@ui/Select';
@@ -50,6 +51,7 @@ const schema = yup.object().shape({
 
 
 const AddPatientEnrolMentLink = ({ type }) => {
+    const { enqueueSnackbar } = useSnackbar();
     const [selectedMenuItem, setSelectedMenuItem] = useState('');
 const navigate = useNavigate()
     // const handleChange = (event) => {
@@ -92,13 +94,31 @@ const navigate = useNavigate()
             try {
                 const patientAddData = await AddPatientapi(values);
                 console.log(patientAddData.messege, "Patient Add Data");
-                alert(patientAddData.messege);
-                navigate('/Clinic-Dashboard')
+                // alert(patientAddData.messege);
+                enqueueSnackbar(patientAddData.messege, {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
             } catch (error) {
-                alert("API Error Occurred");
+                enqueueSnackbar(error, "error to add data!", {
+                    variant: 'error',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });;
             }
         } else {
-            alert("Token is missing");
+            enqueueSnackbar( "error to add data!", {
+                variant: 'error',
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right',
+                },
+            });;
         }
     };
 

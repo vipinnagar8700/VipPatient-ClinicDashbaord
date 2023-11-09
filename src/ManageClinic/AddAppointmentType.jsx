@@ -33,7 +33,7 @@ import { AddAppointmentTypedes, AddAppointmentTypeskjtdrmntf, AddPatientapi, Add
 import Sidebar from '@layout/Sidebar';
 import Panel from '@layout/Panel';
 import { useNavigate } from 'react-router';
-
+import { useSnackbar } from 'notistack';
 
 
 const schema = yup.object().shape({
@@ -42,6 +42,7 @@ const schema = yup.object().shape({
 });
 
 const AddAppointmentType = ({ type }) => {
+    const { enqueueSnackbar } = useSnackbar();
     const [selectedMenuItem, setSelectedMenuItem] = useState('');
 
     const navigate = useNavigate()
@@ -74,14 +75,31 @@ const AddAppointmentType = ({ type }) => {
             if (PatientAddData) {
                 PatientAddData.then((data) => {
                     console.log(data.messege);
-                    alert(data.messege)
-                    navigate('/ManageClinic/Details')
+                    enqueueSnackbar(data.messege, {
+                        variant: 'success',
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'right',
+                        },
+                    });
                 });
             } else {
-                alert("Api's Error OCCUR");
+                enqueueSnackbar( "error to add data!", {
+                    variant: 'error',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
             }
         } else {
-            alert("Token is missing");
+            enqueueSnackbar( "error to add data!", {
+                variant: 'error',
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right',
+                },
+            });
         }
 
     };
@@ -128,8 +146,8 @@ const AddAppointmentType = ({ type }) => {
                                                         }
                                                     </Grid>
                                                     <Grid item xs={6}>
-                                                        <InputLabel htmlFor={`${type}ProfileBirthday`}>Length</InputLabel>
-                                                        <TextField id={`${type}ProfilePrefix`} title="Length" size="small" name="Length" value={values.Length} onChange={handleChange} onBlur={handleBlur} placeholder="Length" fullWidth />
+                                                        <InputLabel htmlFor={`${type}ProfileBirthday`}>Length (in minutes)</InputLabel>
+                                                        <TextField id={`${type}ProfilePrefix`} type='number' title="Length" size="small" name="Length" value={values.Length} onChange={handleChange} onBlur={handleBlur} placeholder="Length" fullWidth />
                                                         {
                                                             touched.Length && errors.Length && <div style={{ color: "red" }}>{errors.Length}</div>
                                                         }

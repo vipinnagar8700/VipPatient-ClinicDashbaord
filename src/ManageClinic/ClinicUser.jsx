@@ -10,11 +10,12 @@ import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import { GetAllUSers, GetBilling, GetBillingCancel } from '@components/Api/AllApi';
 
-
+import { useSnackbar } from 'notistack';
 
 
 
 const ClinicUser = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const [selectedTab, setSelectedTab] = useState('');
   const [openModal, setOpenModal] = useState(false);
   const smallScreen = window.matchMedia('(max-width: 1038.98px)').matches;

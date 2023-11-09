@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Participant from "./Participant";
 import CallEndIcon from '@mui/icons-material/CallEnd';
-import { Avatar, Stack, Typography } from "@mui/material";
+import { Avatar, Stack, Typography,Box } from "@mui/material";
 
 const Room = ({ roomName, room, handleLogout }) => {
   const [participants, setParticipants] = useState([]);
@@ -46,16 +46,24 @@ const Room = ({ roomName, room, handleLogout }) => {
           ""
         )}
       </div>
-      <h3>Patient  Name:</h3>
+      {/* <h3>Patient  Name:</h3> */}
       <div className="remote-participants">{remoteParticipants}</div>
-      <Stack direction="row" gap={4}>
-        <Typography>Dr Name: {roomName}</Typography>
+      <Stack direction="row" gap={4} sx={{justifyContent:'center'}}>
+        {/* <Typography>Dr Name: {roomName}</Typography> */}
+        <Box>
+
+        </Box>
+        <Box>
         <Avatar
-          sx={{ backgroundColor: "red" }}
+          sx={{ backgroundColor: "red", }}
           onClick={handleLogout}
         >
           <CallEndIcon />
         </Avatar>
+        </Box>
+        <Box>
+          
+        </Box>
       </Stack>
     </div>
   );

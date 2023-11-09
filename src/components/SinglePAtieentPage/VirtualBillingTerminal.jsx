@@ -14,6 +14,7 @@ import { ADDPatientFiles, AddSecurityGroup, DEeletPatientFiles, EDITPatientFiles
 import { Avatar, FormControlLabel, Checkbox } from '@mui/material';
 import PaymentHistory from './PaymentHostory';
 import MostRecentAppointment from './MostRecentAppointment';
+import Url from 'url/Allurl';
 
 
 
@@ -97,7 +98,7 @@ const VirtualBillingTerminal = () => {
     window.open(imageUrl, '_blank');
   };
 
-  const baseUrl = 'https://medical.studiomyraa.com/public/uploads/images/';
+  const baseUrl = `${Url}/public/uploads/images/`;
 
 
 

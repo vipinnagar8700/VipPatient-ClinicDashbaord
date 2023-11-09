@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import { AddSecurityGroup, DeleteAppointmentType, DeleteSecondaryLoaction, GetAllAppointmentType, GetAllSecurityLocation, GetBilling, GetBillingCancel, GetTypeAppointment, GettSecurityData, UpdateSecurity, deleteSecurity, editSecurityData } from '@components/Api/AllApi';
 import { Grid, Stack, TextField, InputLabel, Box } from '@mui/material';
-
+import { useSnackbar } from 'notistack';
 
 
 
@@ -33,6 +33,7 @@ const Style = {
 
 
 const AppointmentType = () => {
+    const { enqueueSnackbar } = useSnackbar();
     const [Sec, setSec] = useState(false)
     const [selectedTab, setSelectedTab] = useState('');
     const [openModal, setOpenModal] = useState(false);
@@ -99,7 +100,7 @@ const AppointmentType = () => {
         },
         {
             name: 'Length (in minutes)',
-            selector: row => row.length,
+            selector: row => `${row.length} minutes`,
             sortable: true,
             minWidth: '100px',
         },
@@ -196,12 +197,24 @@ const AppointmentType = () => {
             DeleteData.then((result) => {
                 // Handle the result if needed (e.g., show a success message)
                 console.log(result);
-                alert("Data Successfully Deleted!")
+                enqueueSnackbar("Data Successfully Deleted!", {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
                 setCount(count + 1)
             })
                 .catch((error) => {
                     // Handle errors (e.g., show an error message)
-                    console.error('Error deleting data:', error);
+                    enqueueSnackbar(error, "error to Delete data!", {
+                        variant: 'error',
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'right',
+                        },
+                    });
                 });
         }
 

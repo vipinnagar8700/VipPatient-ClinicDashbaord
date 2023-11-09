@@ -12,6 +12,7 @@ import { ADDNotes, AddSecurityGroup, DeleteNotes, GetBilling, GetBillingCancel, 
 import { Grid, Stack, TextField, InputLabel, Box, Avatar } from '@mui/material';
 import PaymentHistory from './PaymentHostory';
 import MostRecentAppointment from './MostRecentAppointment';
+import Url from 'url/Allurl';
 
 
 
@@ -59,6 +60,7 @@ const Overview = () => {
         setOpenModal(false);
         setSelectedTab('');
     };
+    let { p_id } = useParams()
 
     window.addEventListener('resize', () => {
         if (smallScreen) {
@@ -71,9 +73,9 @@ const Overview = () => {
     //     handleDeleteInvoice()
     // }, [])
 
-    const handleDeleteInvoice = (p_id) => {
+    const handleDeleteInvoice = (id) => {
         setshowpau(true);
-        let EditData = GetSingleNotes(p_id);
+        let EditData = GetSingleNotes(id);
         console.log(EditData)
         if (EditData) {
             EditData.then((data) => {
@@ -92,7 +94,7 @@ const Overview = () => {
     useEffect(() => {
         const fetchTemplateData = async () => {
             try {
-                const data = await getNotesData();
+                const data = await getNotesData(p_id);
                 console.log(data, "This Is all Billing Data!");
                 setPatientSData(data.result || []);
             } catch (error) {
@@ -105,7 +107,6 @@ const Overview = () => {
 
     console.log(PatientSData, "Notes")
 
-    let { p_id } = useParams()
     // alert(p_id)
     const [AS, setSA] = useState(false)
 
@@ -203,7 +204,7 @@ const Overview = () => {
     };
 
     const handleSendMessage = () => {
-        const HET = ADDNotes(subject)
+        const HET = ADDNotes(subject, p_id)
 
         if (HET)
             HET.then((result) => {
@@ -357,7 +358,7 @@ const Overview = () => {
                 <Grid items xs={4}>
                     <Card>
                         <CardContent>
-                            <Avatar src={`https://medical.studiomyraa.com/public/uploads/images/${AS.img}`} sx={{ width: 150, height: 150, mx: 'auto', my: 2 }} />
+                            <Avatar src={`${Url}/public/uploads/images/${AS.img}`} sx={{ width: 150, height: 150, mx: 'auto', my: 2 }} />
                             <Typography sx={{ textAlign: 'center', mb: 1, justifyContent: 'center' }}>
                                 Patient Overview
                             </Typography>
@@ -412,7 +413,7 @@ const Overview = () => {
                                         {PatientSData.length} total Notes found
                                     </Typography>
                                     <div className="Order Page">
-                                        <DataTableExtensions {...tableData}  export={false} print={false}>
+                                        <DataTableExtensions {...tableData} export={false} print={false}>
                                             <DataTable noHeader defaultSortField="id" defaultSortAsc={false} pagination highlightOnHover />
                                         </DataTableExtensions>
                                     </div>

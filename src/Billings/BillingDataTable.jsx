@@ -8,6 +8,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 import { GetBilling, GetBillingCancel } from '@components/Api/AllApi';
 import Sidebar from '@layout/Sidebar';
 import Panel from '@layout/Panel';
@@ -17,6 +18,7 @@ import Panel from '@layout/Panel';
 
 
 const BillingDataTable = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const [selectedTab, setSelectedTab] = useState('');
   const [openModal, setOpenModal] = useState(false);
   const smallScreen = window.matchMedia('(max-width: 1038.98px)').matches;
@@ -39,13 +41,25 @@ const BillingDataTable = () => {
       .then((response) => {
         // Handle the response here if needed
         console.log('Invoice deleted successfully:', response.messege);
-        alert(response.messege)
+        enqueueSnackbar(response.messege, {
+          variant: 'success',
+          anchorOrigin: {
+              vertical: 'top',
+              horizontal: 'right',
+          },
+      });
         setCount(count + 1)
       })
       .catch((error) => {
-        // Handle errors here
-        console.error('Error deleting invoice:', error);
-      });
+        // Handle errors (e.g., show an error message)
+        enqueueSnackbar(error, "error to Cancel data!", {
+            variant: 'error',
+            anchorOrigin: {
+                vertical: 'top',
+                horizontal: 'right',
+            },
+        });
+    });
   };
 
   useEffect(() => {

@@ -8,7 +8,6 @@ import PeriodNav from '@components/PeriodNav';
 import DataTable from 'react-data-table-component';
 import DataTableExtensions from 'react-data-table-component-extensions';
 import 'react-data-table-component-extensions/dist/index.css';
-
 // utils
 import PropTypes from 'prop-types';
 
@@ -34,10 +33,14 @@ import { InputLabel, Stack } from '@mui/material';
 import { Grid } from '@mui/material';
 import { Link, useParams } from 'react-router-dom';
 import DoctorMessenger from '@pages/DoctorMessenger';
-import { SingleProductProvider } from '@components/Api/AllApi';
+import { ChangePasswordPatient, SingleProductProvider } from '@components/Api/AllApi';
 import { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 import Sidebar from '@layout/Sidebar';
 import Panel from '@layout/Panel';
+
+
+
 
 
 const ChangePassword = ({ nav }) => {
@@ -89,12 +92,54 @@ const ChangePassword = ({ nav }) => {
         data,
     };
 
+    const [currentPassword, setCurrentPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmNewPassword, setConfirmNewPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        if (name === 'currentPassword') {
+            setCurrentPassword(value);
+        } else if (name === 'newPassword') {
+            setNewPassword(value);
+        } else if (name === 'confirmNewPassword') {
+            setConfirmNewPassword(value);
+        }
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if (newPassword === confirmNewPassword) {
+            ChangePasswordPatient({ current_password: currentPassword, password: newPassword, password_confirmation: confirmNewPassword })
+                .then((response) => {
+                    // Handle the API response here, display success or error message
+                    // For example:
+                    if (response.status === "Success") {
+                        alert(response.message);
+                    } else {
+                        alert(response.message);
+                        setErrorMessage('Failed to change password. Please try again.');
+                    }
+                })
+                .catch((error) => {
+                    console.log('Error:', error);
+                    setErrorMessage('An error occurred. Please try again later.');
+                });
+        } else {
+            setErrorMessage('Passwords do not match.');
+        }
+    };
+
 
     return (
         <>
         <Sidebar/>
         <Panel/>
-          <Box mt={2}>
+        
+        
+
+        <Box mt={2}>
             <Widget name="ChangePassword" mt={2}>
                 <Box mt={3}>
                     <Card sx={{ maxWidth: 1145 }}>
@@ -133,13 +178,52 @@ const ChangePassword = ({ nav }) => {
                             <div className="Order Page">
                                 <form style={{ marginTop: 8 }}>
                                     <Typography my={3}>Change Account Password</Typography>
-                                    <InputLabel  >New Password</InputLabel>
-                                    <TextField sx={{ marginTop: 1 }} size="small" fullWidth />
-                                    <InputLabel >Repeat New Password</InputLabel>
-                                    <TextField sx={{ marginTop: 1 }} size="small" fullWidth />
-                                    <button style={{ backgroundColor: 'green', margin: 1, marginTop: 20, borderRadius: 6, color: 'white', width: '120px', height: 40 }}>Save Changes</button>
+                                    <InputLabel>Current Password</InputLabel>
+                                    <TextField
+                                        sx={{ marginTop: 1 }}
+                                        size="small"
+                                        fullWidth
+                                        type="text"
+                                        name="currentPassword"
+                                        value={currentPassword}
+                                        onChange={handleChange}
+                                    />
+                                    <InputLabel>New Password</InputLabel>
+                                    <TextField
+                                        sx={{ marginTop: 1 }}
+                                        size="small"
+                                        fullWidth
+                                        type="text"
+                                        name="newPassword"
+                                        value={newPassword}
+                                        onChange={handleChange}
+                                    />
+                                    <InputLabel>Confirm New Password</InputLabel>
+                                    <TextField
+                                        sx={{ marginTop: 1 }}
+                                        size="small"
+                                        fullWidth
+                                        type="text"
+                                        name="confirmNewPassword"
+                                        value={confirmNewPassword}
+                                        onChange={handleChange}
+                                    />
+                                    {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+                                    <button
+                                        style={{
+                                            backgroundColor: 'green',
+                                            margin: 1,
+                                            marginTop: 20,
+                                            borderRadius: 6,
+                                            color: 'white',
+                                            width: '120px',
+                                            height: 40,
+                                        }}
+                                        onClick={handleSubmit}
+                                    >
+                                        Save Changes
+                                    </button>
                                 </form>
-
                             </div>
                         </CardContent>
 
@@ -174,12 +258,12 @@ const ChangePassword = ({ nav }) => {
                         <CardContent>
 
                             <div className="Order Page">
-                            <Typography sx={{ fontSize: 18, fontWeight: 400 }} color="text.secondary" gutterBottom>
-                               Login History
-                            </Typography>
+                                <Typography sx={{ fontSize: 18, fontWeight: 400 }} color="text.secondary" gutterBottom>
+                                    Login History
+                                </Typography>
                                 <Card sx={{ minWidth: 1145, '@media screen and (max-width: 1200px)': { minWidth: '100%' }, backgroundColor: '#F1F5F8' }}>
                                     <CardContent>
-                                       
+
                                         <div className="Order Page">
                                             <DataTableExtensions
                                                 {...tableData}
@@ -207,8 +291,6 @@ const ChangePassword = ({ nav }) => {
             </Widget>
         </Box>
         </>
-
-      
 
     )
 }

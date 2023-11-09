@@ -7,6 +7,7 @@ import { useFormik } from "formik";
 import * as yup from 'yup';
 import DropFiles from '@components/DropFiles';
 import Btn from '@ui/Btn';
+import { useSnackbar } from 'notistack';
 import CustomSelect from '@ui/Select';
 import DateInput from '@components/MaskedInputs/Date';
 import Phone from '@components/MaskedInputs/Phone';
@@ -56,8 +57,8 @@ const schema = yup.object().shape({
 
 const EditAppointmentType = ({ type }) => {
     const [selectedMenuItem, setSelectedMenuItem] = useState('');
-
-const navigate = useNavigate()
+    const { enqueueSnackbar } = useSnackbar();
+    const navigate = useNavigate()
 
     const { notify } = useNotistack('Your changes have been successfully saved.', 'success');
 
@@ -101,13 +102,32 @@ const navigate = useNavigate()
             if (PatientAddData) {
                 PatientAddData.then((data) => {
                     console.log(data);
-                    alert("User Successfully Added!")
+                    // alert("User Successfully Added!")
+                    enqueueSnackbar("Data Successfully Updated!", {
+                        variant: 'success',
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'right',
+                        },
+                    });
                 });
             } else {
-                alert("Api's Error OCCUR");
+                enqueueSnackbar( "error to Updated data!", {
+                    variant: 'error',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
             }
         } else {
-            alert("Token is missing");
+            enqueueSnackbar( "error to Updated data!", {
+                variant: 'error',
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right',
+                },
+            });
         }
 
     };
@@ -146,13 +166,25 @@ const navigate = useNavigate()
 
             result.then((data) => {
                 console.log(data.messege, "thtrtrer;ojgsrdbehx");
-                alert(data.messege);
-                navigate('/ManageClinic/Details')
+                // alert(data.messege);
+                enqueueSnackbar(data.messege, {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
 
             })
             console.log(result, "Data Updated Successfully");
         } catch (error) {
-            console.error("Error occurred while updating data:", error);
+            enqueueSnackbar(error, "error to Updated data!", {
+                variant: 'error',
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right',
+                },
+            });
         }
     };
 
@@ -182,7 +214,7 @@ const navigate = useNavigate()
                                                     </Grid>
                                                     <Grid item xs={6}>
                                                         <InputLabel htmlFor={`${type}ProfileBirthday`}> Length (in Minutes)</InputLabel>
-                                                        <TextField id={`${type}ProfilePrefix`} title="Length" size="small" name="length" value={length} onChange={(e) => {
+                                                        <TextField id={`${type}ProfilePrefix`} type='number' title="Length" size="small" name="length" value={length} onChange={(e) => {
                                                             setAA({
                                                                 ...AA, length: e.target.value
                                                             })

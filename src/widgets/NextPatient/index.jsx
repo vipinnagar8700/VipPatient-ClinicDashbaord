@@ -24,6 +24,7 @@ import { appointments } from '@db/appointments';
 import { GetAllPatientData } from '@components/Api/AllApi';
 import { Link } from 'react-router-dom';
 import { Avatar, Grid, Stack, Typography, Box, Drawer } from '@mui/material';
+import Url from 'url/Allurl';
 
 const NextPatient = () => {
     const [mainSwiper, setMainSwiper] = useState(null);
@@ -82,7 +83,7 @@ const NextPatient = () => {
 
             <WidgetNav title=" Total Active Patient" style={{ paddingTop: 20 }} handler={handleNavigation} />
             <SlideContent style={{ marginTop: 0, marginLeft: 50, marginBottom: 0, paddingBottom: 0 }}>
-                <Avatar avatar={`https://medical.studiomyraa.com/public/uploads/images/${PatientData?.img}`} sx={{ backgroundColor: '#33C92E', height: 50, width: 50 }} />
+                <Avatar avatar={`${Url}/public/uploads/images/${PatientData?.img}`} sx={{ backgroundColor: '#33C92E', height: 50, width: 50 }} />
                 <div className="info">
                     <Typography sx={{ fontSize: 26, fontWeight: 900, lineHeight: 1 }}>
                         {PatientData?.length}
@@ -103,7 +104,7 @@ const NextPatient = () => {
                                 return (
                                     <SwiperSlide key={index}>
                                         <SlideContent style={{ marginBottom: 0 }}>
-                                            <Avatar avatar={`https://medical.studiomyraa.com/public/uploads/images/${data.img}`} alt={data.name} />
+                                            <Avatar avatar={`${Url}/public/uploads/images/${data.img}`} alt={data.name} />
                                             <div className="info">
                                                 <Truncated className="title" text={data.name} />
                                                 <Truncated className="name" text={data.address} />

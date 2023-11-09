@@ -4,7 +4,7 @@ import { Input } from '@ui/Field';
 import { Container, Grid, Button, TextField, InputLabel, Select, MenuItem, Box, Stack } from '@mui/material';
 // components\
 import SignatureCanvas from 'react-signature-canvas';
-
+import { useSnackbar } from 'notistack';
 import { useFormik } from "formik";
 import * as yup from 'yup';
 import DropFiles from '@components/DropFiles';
@@ -57,6 +57,7 @@ const schema = yup.object().shape({
 });
 
 const CreateUser = ({ type }) => {
+    const { enqueueSnackbar } = useSnackbar();
     const navigate = useNavigate()
     const [selectedMenuItem, setSelectedMenuItem] = useState('');
 
@@ -92,15 +93,31 @@ const CreateUser = ({ type }) => {
             if (PatientAddData) {
                 PatientAddData.then((data) => {
                     console.log(data.message);
-                    alert(data.message)
-                    navigate('/ManageClinic/Details')
-
+                    enqueueSnackbar(data.message, {
+                        variant: 'success',
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'right',
+                        },
+                    });
                 });
             } else {
-                alert("Api's Error OCCUR");
+                enqueueSnackbar( "error to Create data!", {
+                    variant: 'error',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
             }
         } else {
-            alert("Token is missing");
+            enqueueSnackbar( "error to create data!", {
+                variant: 'error',
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right',
+                },
+            });
         }
 
     };

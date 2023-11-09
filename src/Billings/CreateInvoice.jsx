@@ -23,8 +23,14 @@ import Cookies from 'js-cookie';
 import { useEffect } from 'react';
 import Sidebar from '@layout/Sidebar';
 import { useNavigate } from 'react-router';
+// components
+import { useSnackbar } from 'notistack';
+
+
+
 
 const CreateInvoice = () => {
+    const { enqueueSnackbar } = useSnackbar();
 
     const navigate = useNavigate()
     const [selectedTab, setSelectedTab] = useState('');
@@ -70,12 +76,23 @@ const CreateInvoice = () => {
             .then((data) => {
                 // Handle the response from the API, if needed
                 console.log('API response:', data.messege);
-                alert(data.messege)
-                navigate('/Billing-Data-List')
+                enqueueSnackbar(data.messege, {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
             })
             .catch((error) => {
-                // Handle errors from the API
-                console.error('API Error:', error);
+                // Handle errors (e.g., show an error message)
+                enqueueSnackbar(error, "error to Delete data!", {
+                    variant: 'error',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
             });
     };
 
@@ -122,76 +139,87 @@ const CreateInvoice = () => {
                         <Card sx={{ minWidth: 1175, '@media screen and (max-width: 1400px)': { minWidth: '100%' } }}>
                             <CardContent>
 
+                                <Grid container >
+                                    <Grid items xs={6} sm={4} md={3} m={2}>
+                                        <Stack>
+                                            <InputLabel>Invoice Title</InputLabel>
+                                            <TextField size="small" name="invoiceTitle" fullWidth value={invoiceTitle} onChange={(e) => setInvoiceTitle(e.target.value)} />
+
+                                        </Stack>
+                                    </Grid>
+                                    <Grid items xs={6} sm={4} md={4} m={2}>
+                                        <Stack>
+
+                                            <InputLabel>Invoice Date</InputLabel>
+                                            <TextField
+                                                size="small"
+                                                fullWidth
+                                                name="invoiceDate"
+                                                type="date" // Use type="date" for date picker input
+                                                value={invoiceDate}
+                                                onChange={(e) => setInvoiceDate(e.target.value)}
+                                            />
+
+                                        </Stack>
+                                    </Grid>
+                                    <Grid items xs={6} sm={4} md={4} m={2}>
+                                        <Stack>
+
+                                            <InputLabel>Search Patient Name</InputLabel>
+                                            <Autocomplete
+                                                size="small"
+                                                options={filteredOptions}
+                                                getOptionLabel={(option) => option.name}
+                                                sx={{ width: 300 }}
+                                                renderInput={(params) => <TextField {...params} />}
+                                                onInputChange={(event, newValue) => setPatientName(newValue)}
+                                                onChange={(event, newValue) => {
+                                                    if (newValue) {
+                                                        setSelectedPatientId(newValue.id); // Update selectedPatientId with the ID of the selected option
+                                                        getPatientData(newValue.id); // Call getPatientData with the selected option's ID
+                                                    } else {
+                                                        setSelectedPatientId(null); // Clear selectedPatientId if no option is selected
+                                                    }
+                                                }}
+                                            />
+                                            {/* <TextField
+    size="small"
+    fullWidth
+    name="patientName"
+    value={patientName}
+    onChange={(e) => setPatientName(e.target.value)}
+    onFocus={handleInputFocus}
+    onBlur={handleInputBlur}
+    renderInput={(params) => <TextField {...params} label="Select A Patient" />}
+/>
+{open && filteredOptions.length > 0 && (
+    <Paper square>
+        {filteredOptions.map((option, index) => (
+            <MenuItem
+                style={{ padding: 7, position: 'fixed', minWidth: '200px' }}
+                key={index}
+                value={option.id}
+                onClick={() => {
+                    setPatientName(option.name); // Update the TextField value with the selected option's name
+                    setOpen(false); // Close the dropdown
+                    alert(option.id); // Show an alert with the selected option's ID
+                }}
+            >
+                <Typography value={option.id} sx={{ color: 'white' }}>
+                    {option.name}
+                </Typography>
+            </MenuItem>
+        ))}
+    </Paper>
+)} */}
+
+                                        </Stack>
+                                    </Grid>
+                                </Grid>
                                 <Box sx={{ display: 'flex', gap: 20 }}>
-                                    <Stack>
-                                        <InputLabel>Invoice Title</InputLabel>
-                                        <TextField size="small" name="invoiceTitle" fullWidth value={invoiceTitle} onChange={(e) => setInvoiceTitle(e.target.value)} />
 
-                                    </Stack>
-                                    <Stack>
 
-                                        <InputLabel>Invoice Date</InputLabel>
-                                        <TextField
-                                            size="small"
-                                            fullWidth
-                                            name="invoiceDate"
-                                            type="date" // Use type="date" for date picker input
-                                            value={invoiceDate}
-                                            onChange={(e) => setInvoiceDate(e.target.value)}
-                                        />
 
-                                    </Stack>
-                                    <Stack>
-
-                                        <InputLabel>Patient Name</InputLabel>
-                                        <Autocomplete
-                                            size="small"
-                                            options={filteredOptions}
-                                            getOptionLabel={(option) => option.name}
-                                            sx={{ width: 300 }}
-                                            renderInput={(params) => <TextField {...params} label="Search Patient" />}
-                                            onInputChange={(event, newValue) => setPatientName(newValue)}
-                                            onChange={(event, newValue) => {
-                                                if (newValue) {
-                                                    setSelectedPatientId(newValue.id); // Update selectedPatientId with the ID of the selected option
-                                                    getPatientData(newValue.id); // Call getPatientData with the selected option's ID
-                                                } else {
-                                                    setSelectedPatientId(null); // Clear selectedPatientId if no option is selected
-                                                }
-                                            }}
-                                        />
-                                        {/* <TextField
-                                            size="small"
-                                            fullWidth
-                                            name="patientName"
-                                            value={patientName}
-                                            onChange={(e) => setPatientName(e.target.value)}
-                                            onFocus={handleInputFocus}
-                                            onBlur={handleInputBlur}
-                                            renderInput={(params) => <TextField {...params} label="Select A Patient" />}
-                                        />
-                                        {open && filteredOptions.length > 0 && (
-                                            <Paper square>
-                                                {filteredOptions.map((option, index) => (
-                                                    <MenuItem
-                                                        style={{ padding: 7, position: 'fixed', minWidth: '200px' }}
-                                                        key={index}
-                                                        value={option.id}
-                                                        onClick={() => {
-                                                            setPatientName(option.name); // Update the TextField value with the selected option's name
-                                                            setOpen(false); // Close the dropdown
-                                                            alert(option.id); // Show an alert with the selected option's ID
-                                                        }}
-                                                    >
-                                                        <Typography value={option.id} sx={{ color: 'white' }}>
-                                                            {option.name}
-                                                        </Typography>
-                                                    </MenuItem>
-                                                ))}
-                                            </Paper>
-                                        )} */}
-
-                                    </Stack>
                                 </Box>
 
 
@@ -205,11 +233,7 @@ const CreateInvoice = () => {
                                             Line Items
                                         </Typography>
                                     </Grid>
-                                    <Grid xs={6} sx={{ textAlign: 'right' }}>
-                                        <button style={{ backgroundColor: 'red', width: '120px', height: 40, borderRadius: 6, color: 'white' }}>
-                                            Add Line items
-                                        </button>
-                                    </Grid>
+
 
                                 </Grid>
                                 <Grid container gap={4}>
@@ -227,10 +251,10 @@ const CreateInvoice = () => {
                                     </Grid>
                                     <Grid items xs={1}>
 
-                                        <InputLabel>Action</InputLabel>
-                                        <button style={{ backgroundColor: 'red', width: '20px', height: 35, borderRadius: 6, color: 'white' }}>
+                                        {/* <InputLabel>Action</InputLabel> */}
+                                        {/* <button style={{ backgroundColor: 'red', width: '20px', height: 35, borderRadius: 6, color: 'white' }}>
                                             X
-                                        </button>
+                                        </button> */}
                                     </Grid>
 
                                 </Grid>

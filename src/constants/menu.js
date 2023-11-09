@@ -11,7 +11,7 @@ export const menu = [
             { name: "Add Patients", link: '/Add-patient' },
             { name: "Find Patients", link: '/Find-patient' },
             { name: "Views Patients", link: '/All-patient' },
-            { name: "Views Shared Patients ", link: '/tests' }
+            { name: "Views Shared Patients " }
         ]
     },
     {
@@ -79,7 +79,7 @@ export const menu = [
         name: 'Documentation',
         link: 'https://help.statepass.com/'
     },
-    
+
     {
         // icon: 'wallet',
         // name: 'Logout',
@@ -96,9 +96,9 @@ export const menu = [
     //     name: 'My Orders',
     //     link: '/patient_reviews'
     // },
-   
-   
-   
+
+
+
     // {
     //     cat: 'dashboard',
     //     icon: 'blocks',
@@ -125,7 +125,7 @@ export const menu = [
     //         { name: "Doctor Appointments", link: '/doctor_appointments' }
     //     ]
     // },
-    
+
     // {
     //     cat: 'doctors',
     //     icon: 'stethoscope',
@@ -155,5 +155,5 @@ export const menu = [
         // name: 'Finances',
         // link: '/finances'
     },
-    
+
 ]

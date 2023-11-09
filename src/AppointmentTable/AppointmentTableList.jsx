@@ -9,6 +9,7 @@ import DataTableExtensions from 'react-data-table-component-extensions';
 import 'react-data-table-component-extensions/dist/index.css';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
+import { useSnackbar } from 'notistack';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
@@ -38,6 +39,7 @@ import { useRef } from 'react';
 import useContentHeight from '@hooks/useContentHeight';
 import Cookies from 'js-cookie';
 import { Form } from 'react-bootstrap';
+import Url from 'url/Allurl';
 
 
 
@@ -45,6 +47,7 @@ import { Form } from 'react-bootstrap';
 
 
 const AppointmentDataList = () => {
+    const { enqueueSnackbar } = useSnackbar();
     const [selectedTab, setSelectedTab] = useState('');
     // const [openModal, setOpenModal] = useState(false);
     const smallScreen = window.matchMedia('(max-width: 1038.98px)').matches;
@@ -130,14 +133,29 @@ const AppointmentDataList = () => {
             redirect: 'follow'
         };
 
-        return fetch("https://medical.studiomyraa.com/api/clinic_appointment", requestOptions)
+        return fetch(`${Url}/api/clinic_appointment`, requestOptions)
             .then((res) => res.json())
             .then((json) => {
                 console.log(json, "anjkhgdchjm");
-                alert(json.messege)
+                enqueueSnackbar(json.messege, {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
                 handleAcceptAppointment(id)
             })
-            .catch((e) => console.log(e));
+            .catch((error) => {
+                // Handle errors (e.g., show an error message)
+                enqueueSnackbar(error, "error to Update data!", {
+                    variant: 'error',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
+            });
 
     };
 
@@ -163,14 +181,29 @@ const AppointmentDataList = () => {
             redirect: 'follow'
         };
 
-        return fetch("https://medical.studiomyraa.com/api/accept_appointment", requestOptions)
+        return fetch(`${Url}/api/accept_appointment`, requestOptions)
             .then((res) => res.json())
             .then((json) => {
                 console.log(json, "anjkhgdchjm");
-                alert(json.messege)
+                enqueueSnackbar(json.messege, {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
                 window.location.reload()
             })
-            .catch((e) => console.log(e));
+            .catch((error) => {
+                // Handle errors (e.g., show an error message)
+                enqueueSnackbar(error, "error to Delete data!", {
+                    variant: 'error',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
+            });
     }
 
 
@@ -318,7 +351,8 @@ const AppointmentDataList = () => {
         },
         {
             name: 'Preferences',
-            selector: (row) => row.day + row.notes,
+            selector: (row) => `${row.day} (\n Notes - ${row.notes})`,
+
 
             sortable: true,
         },
@@ -510,9 +544,9 @@ const AppointmentDataList = () => {
                     </Form>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={closeModal} color="primary">
+                    <button style={{ padding: 4, backgroundColor: 'red', color: "white" }} onClick={closeModal} color="primary">
                         Cancel
-                    </Button>
+                    </button>
 
                 </DialogActions>
             </Dialog>

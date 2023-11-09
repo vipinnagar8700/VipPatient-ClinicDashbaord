@@ -8,7 +8,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
-import { AddSecurityGroup, GetBilling, GetBillingCancel, GettSecurityData, UpdateSecurity, deleteSecurity, editSecurityData } from '@components/Api/AllApi';
+import { AddSecurityGroup, GetBilling, GetBillingCancel, GettSecurityData, UpdateSecurity, deleteSecurity, editSecurityData, inpatient } from '@components/Api/AllApi';
 import { Grid, Stack, TextField, InputLabel, Box } from '@mui/material';
 
 
@@ -51,6 +51,10 @@ const MostRecentAppointment = () => {
         }
     });
 
+    let { p_id } = useParams()
+    // alert(p_id)
+
+
 
     useEffect(() => {
         handleDeleteInvoice()
@@ -69,16 +73,16 @@ const MostRecentAppointment = () => {
     };
     console.log(Sec, "AHGFSXDCFVGBHJNKMLJHGFDSDFGVHBNJ")
 
-  let name = Sec &&  Sec?.name;
-  console.log(name,"KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKk")
-  let id = Sec && Sec?.id;
+    let name = Sec && Sec?.name;
+    console.log(name, "KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKk")
+    let id = Sec && Sec?.id;
 
 
     useEffect(() => {
         const fetchTemplateData = async () => {
             try {
-                const data = await GettSecurityData();
-                console.log(data, "This Is all Billing Data!");
+                const data = await inpatient(p_id);
+                console.log(data, "get_clinic_appointment_inpatient!");
                 setPatientSData(data.result || []);
             } catch (error) {
                 console.error(error);
@@ -93,38 +97,42 @@ const MostRecentAppointment = () => {
     const columns = [
         {
             name: 'Date/Time',
-            selector: row => row.name,
+            selector: row => row.start_date,
             sortable: true,
         },
         {
             name: 'Type',
-            selector: row => row.name,
+            selector: row => row.appointment_type,
             sortable: true,
         },
         {
             name: 'Clinic Location',
-            selector: row => row.name,
+            selector: row => row.location,
             sortable: true,
         },
         {
             name: 'Doctor Seen',
-            selector: row => row.name,
+            selector: row => row.is_confirmed,
             sortable: true,
         },
         {
             name: 'Cancelled?',
-            selector: row => row.name,
+            selector: row => row.is_cancelled,
             sortable: true,
         },
 
 
-       
+
     ];
 
     const data = PatientSData && PatientSData.map(item => ({
         id: item?.id || '',
-        name: item?.name || '',
-    }));
+        start_date :item?.start_date || '',
+        name: item?.created_at || '',
+        location: item?.location?.[0]?.name || '',
+        appointment_type: item?.appointment_type?.[0]?.name || '',
+        is_confirmed: item?.status || '',
+        is_cancelled: item?.is_cancelled || ''  }));
 
     const tableData = {
         columns,
@@ -179,7 +187,7 @@ const MostRecentAppointment = () => {
 
     const handleDelete = (id) => {
         let DeleteData = deleteSecurity(id)
-       
+
         if (DeleteData) {
             DeleteData.then((result) => {
                 // Handle the result if needed (e.g., show a success message)
@@ -194,14 +202,14 @@ const MostRecentAppointment = () => {
         }
 
     }
-       
+
     const handleUpdate = (e) => {
 
         e.preventDefault();
 
         try {
-            console.log(id,name,"qqqqqqqqqqqqqqqqqqqqqqqq")
-            const result = UpdateSecurity(id,name
+            console.log(id, name, "qqqqqqqqqqqqqqqqqqqqqqqq")
+            const result = UpdateSecurity(id, name
             );
 
             result.then((data) => {
@@ -222,20 +230,20 @@ const MostRecentAppointment = () => {
 
     return (
         <>
-           
+
             <Card sx={{ minWidth: 670, marginLeft: '0px', '@media screen and (max-width: 1200px)': { minWidth: '100%' } }}>
                 <CardContent>
-                    
+
                     <Card sx={{ minWidth: 605, '@media screen and (max-width: 1200px)': { minWidth: '100%' }, backgroundColor: '#F1F5F8' }}>
                         <CardContent>
-                        <Typography sx={{ fontSize: 18, fontWeight: 400 }} color="text.secondary" gutterBottom>
+                            <Typography sx={{ fontSize: 18, fontWeight: 400 }} color="text.secondary" gutterBottom>
                                 Most Recent Appointment
                             </Typography>
                             <Typography sx={{ fontSize: 16, fontWeight: 300 }} color="text.secondary" gutterBottom>
                                 {PatientSData.length} total Recent Appointment found
                             </Typography>
                             <div className="Order Page">
-                                <DataTableExtensions {...tableData}  export={false} print={false}>
+                                <DataTableExtensions {...tableData} export={false} print={false}>
                                     <DataTable noHeader defaultSortField="id" defaultSortAsc={false} pagination highlightOnHover />
                                 </DataTableExtensions>
                             </div>

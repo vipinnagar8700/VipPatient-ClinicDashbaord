@@ -5,6 +5,7 @@ import { Container, Grid, Button, TextField, InputLabel, Select, option, Box } f
 // components\
 import { useFormik } from "formik";
 import * as yup from 'yup';
+import { useSnackbar } from 'notistack';
 import DropFiles from '@components/DropFiles';
 import Btn from '@ui/Btn';
 import CustomSelect from '@ui/Select';
@@ -57,7 +58,7 @@ const schema = yup.object().shape({
 const EditUser = ({ type }) => {
     const [selectedoption, setSelectedoption] = useState('');
     const [AA, setAA] = useState(false)
-
+    const { enqueueSnackbar } = useSnackbar();
     // const handleChange = (event) => {
     //     setSelectedoption(event.target.value);
     // };
@@ -91,13 +92,31 @@ const EditUser = ({ type }) => {
             if (PatientAddData) {
                 PatientAddData.then((data) => {
                     console.log(data);
-                    alert("User Successfully Added!")
+                    enqueueSnackbar("User Successfully Added!", {
+                        variant: 'success',
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'right',
+                        },
+                    });
                 });
             } else {
-                alert("Api's Error OCCUR");
+                enqueueSnackbar("error to Delete data!", {
+                    variant: 'error',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
             }
         } else {
-            alert("Token is missing");
+            enqueueSnackbar("error to Delete data!", {
+                variant: 'error',
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right',
+                },
+            });
         }
 
     };
@@ -157,13 +176,23 @@ const EditUser = ({ type }) => {
 
             result.then((data) => {
                 console.log(data, "thtrtrer;ojgsrdbehx");
-                alert("Data Successfully Updated");
-                // Navigate('/dashboard_a')
-
+                enqueueSnackbar("Data Successfully Updated!", {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
             })
             console.log(result, "Data Updated Successfully");
         } catch (error) {
-            console.error("Error occurred while updating data:", error);
+            enqueueSnackbar(error, "error to Updated data!", {
+                variant: 'error',
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right',
+                },
+            });
         }
     };
 
@@ -405,9 +434,9 @@ const EditUser = ({ type }) => {
                                                     </Grid>
                                                     <Grid item xs={6}>
                                                         <InputLabel htmlFor={`${type}ProfileBirthday`}>Appointment Email Signature</InputLabel>
-                                                        <TextField id={`${type}ProfileAddress2`} title="Signature Contact" value={signature} onChange={(e) => {
+                                                        <TextField id={`${type}ProfileAddress2`} type='file' title="Signature Contact" onChange={(e) => {
                                                             setAA({
-                                                                ...AA, signature: e.target.value
+                                                                ...AA, signature: e.target.files[0]
                                                             })
                                                         }} size="small" placeholder="Signature Contact" name='Signature' fullWidth />
 
