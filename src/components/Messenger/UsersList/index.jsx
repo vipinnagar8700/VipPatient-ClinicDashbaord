@@ -54,14 +54,14 @@ const UserList = ({ variant, user, onUserSelect, setModal, activeList, setActive
         const AllUsers = GetAllPatientData()
         if (AllUsers) {
             AllUsers.then((data) => {
-                console.log(data, "ALL USERS DATA FOR MESSAGE998")
+                // console.log(data, "ALL USERS DATA FOR MESSAGE998")
                 setPost(data?.result)
             })
         }
     }, [])
 
 
-    console.log(post, "UUUUUUUUUUUUUUUUUUUUUUUUUuuuu")
+    // console.log(post, "UUUUUUUUUUUUUUUUUUUUUUUUUuuuu")
 
 
 
@@ -69,13 +69,14 @@ const UserList = ({ variant, user, onUserSelect, setModal, activeList, setActive
     const handleClick = (data) => {
         onUserSelect(data);
         setModal(true);
-        onClick(data); // Call the callback with the user's data
+        onClick(data);
+        console.log("THis is clicked!") // Call the callback with the user's data
     }
 
 
     const handleUserClick = (userData) => {
         // Handle the clicked user's data here in the UserList component
-        console.log("Clicked user's data:", userData);
+        // console.log("Clicked user's data:", userData);
         // You can do whatever you need with the clicked user's data here
     }
 

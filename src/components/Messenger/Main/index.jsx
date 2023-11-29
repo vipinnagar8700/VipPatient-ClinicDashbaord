@@ -28,7 +28,8 @@ import Url from 'url/Allurl';
 
 const Main = ({ user }) => {
     const trackRef = useRef(null);
-    console.log(user, "KKKKKKKKKKK1")
+    const [count, setCount] = useState(0)
+    // console.log(user, "KKKKKKKKKKK1")
     const variant = 'patient'
     // Retrieve the data from LocalStorage
     const scrollToBottom = () => {
@@ -37,22 +38,18 @@ const Main = ({ user }) => {
         }
     };
 
-
-
-
     const dataFromLocalStorage = localStorage.getItem("clinic");
 
     // Parse the JSON data back to an object
     const parsedData = JSON.parse(dataFromLocalStorage);
 
-
-    console.log(parsedData, "AL Data AAAAAAAAAAAAAAAAAAAAA");
+    // console.log(parsedData, "AL Data AAAAAAAAAAAAAAAAAAAAA");
 
     const ValueID = parsedData?.id;
     const ClinicID = parsedData?.clinic_id;
-    console.log(ValueID, "This IS Clinic Single ID")
+    // console.log(ValueID, "This IS Clinic Single ID")
     const UserNamam = parsedData?.name;
-    console.log(UserNamam, "OOOOOOO")
+    // console.log(UserNamam, "OOOOOOO")
     const doctor = useSelector(state => state['messenger']['doctor']);
     const patient = useSelector(state => state['messenger']['patient']);
     const db = variant === 'patient' ? patient : doctor;
@@ -95,9 +92,9 @@ const Main = ({ user }) => {
 
     const getAllChat = () => {
         let token = Cookies.get("clinic")
-        console.log(token, "This Is token for all Api's")
-        console.log(user?.id)
-        console.log(user?.clinic_id)
+        // console.log(token, "This Is token for all Api's")
+        // console.log(user?.id)
+        // console.log(user?.clinic_id)
         const myHeaders = new Headers();
         myHeaders.append("Accept", "application/json");
         myHeaders.append("Authorization", `Bearer ${token}`);
@@ -122,7 +119,8 @@ const Main = ({ user }) => {
             .then(result => {
                 if (result.success) {
                     setChatMessages(result.data);
-                    console.log(result?.data, "This is Chat")
+                    // console.log(rexsult?.data, "This is Chat")
+                    setCount(count + 1)
                 } else {
                     console.error("Failed to fetch chat messages");
                 }
@@ -133,9 +131,11 @@ const Main = ({ user }) => {
     }
 
     return (
+
+
         <Container>
             {
-                user && <Header variant={variant} user={user} elRef={headerRef} />
+                user && <Header variant={variant} user={user} getAllChat={getAllChat} elRef={headerRef} />
             }
             {/* < VidocallMain user={user} /> */}
             <ScrollContainer height={height}>
@@ -155,7 +155,7 @@ const Main = ({ user }) => {
                     ))}
                 </div>
             </ScrollContainer>
-            <Input db={variant} getAllChat={getAllChat} addMessageAndScroll={addMessageAndScroll} id={user} user={user} elRef={footerRef} />
+            <Input db={variant} addMessageAndScroll={addMessageAndScroll} id={user} user={user} elRef={footerRef} />
 
         </Container>
     )

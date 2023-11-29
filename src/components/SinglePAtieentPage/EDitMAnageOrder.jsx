@@ -226,13 +226,13 @@ const ManageOrder = () => {
 
                         <Grid items xs={12}>
 
-                            <Card sx={{ minWidth: 770, marginLeft: '0px', '@media screen and (max-width: 1200px)': { minWidth: '100%' } }}>
+                            <Card sx={{ marginLeft: '0px', '@media screen and (max-width: 1200px)': { minWidth: '100%' } }}>
                                 <CardContent>
                                     <Typography sx={{ fontSize: 18, fontWeight: 400 }} color="text.secondary" gutterBottom>
                                         Manage Orders
                                     </Typography>
 
-                                    <Card sx={{ minWidth: 845, '@media screen and (max-width: 1200px)': { minWidth: '100%' }, backgroundColor: '#F1F5F8' }}>
+                                    <Card sx={{  '@media screen and (max-width: 1200px)': { minWidth: '100%' }, backgroundColor: '#F1F5F8' }}>
                                         <CardContent>
                                             <Typography sx={{ fontSize: 16, fontWeight: 300 }} color="text.secondary" gutterBottom>
                                                 {PatientSData.length} total   Manage Orders found

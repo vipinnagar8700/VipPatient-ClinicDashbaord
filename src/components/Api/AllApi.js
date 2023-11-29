@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import Url from "../../url/Allurl";
-console.log(Url)
+// console.log(Url)
 
 // Retrieve the data from LocalStorage
 const dataFromLocalStorage = localStorage.getItem("clinic");
@@ -104,7 +104,7 @@ export const LoginApi = (email, password) => {
 export const ProfileApi = () => {
 
     let token = Cookies.get("clinic")
-    console.log(token, "This Is token for all Api's")
+    //    // console.log(token, "This Is token for all Api's")
 
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
@@ -125,7 +125,7 @@ export const ProfileApi = () => {
 
 
 
-console.log(parsedData, "AL Data AAAAAAAAAAAAAAAAAAAAA");
+// console.log(parsedData, "AL Data AAAAAAAAAAAAAAAAAAAAA");
 
 const ValueID = parsedData?.id;
 const ClinicID = parsedData?.clinic_id;
@@ -135,7 +135,7 @@ console.log(ClinicID, "This IS Clinic  ID")
 
 export const UpdateProfileData = (name, mname, lname, email, address, address2, city, dob, phone, pincode, state, doc_license, SignatureDataToUpdate, imageDataToUpdate, gender, about) => {
     let token = Cookies.get("clinic")
-    console.log(token, "This Is token for all Api's")
+       // console.log(token, "This Is token for all Api's")
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -176,7 +176,7 @@ export const UpdateProfileData = (name, mname, lname, email, address, address2, 
 
 export const LogoutProfile = () => {
     let token = Cookies.get("clinic")
-    console.log(token, "This Is token for all Api's")
+    //    // console.log(token, "This Is token for all Api's")
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -197,7 +197,7 @@ export const LogoutProfile = () => {
 
 export const ViewProduct = () => {
     let token = Cookies.get("clinic")
-    console.log(token, "This Is token for all Api's")
+       // console.log(token, "This Is token for all Api's")
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -220,7 +220,7 @@ export const ViewProduct = () => {
 export const SingleProvider = (p_id) => {
     console.log(p_id,)
     let token = Cookies.get("clinic")
-    console.log(token, "This Is token for all Api's")
+       // console.log(token, "This Is token for all Api's")
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -241,7 +241,7 @@ export const SingleProvider = (p_id) => {
 export const SingleProductProvider = (p_id) => {
     console.log(p_id,)
     let token = Cookies.get("clinic")
-    console.log(token, "This Is token for all Api's")
+       // console.log(token, "This Is token for all Api's")
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -263,7 +263,7 @@ export const SingleProductProvider = (p_id) => {
 export const AddPatientapi = (values) => {
     const { FirstName, Email, Phone, password, MiddleName, LastName, PreferName, BirthDate, Gender, Address, Address2, City, State, Pincode, Emergency, Referring_Doctor, Doctor_license, Doctor_State, Doctor_phone, SocialSecurity, Registry_id } = values;
     let token = Cookies.get("clinic")
-    console.log(token, "This Is token for all Api's")
+       // console.log(token, "This Is token for all Api's")
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -309,7 +309,7 @@ export const AddPatientapi = (values) => {
 
 export const GetAllPatientData = () => {
     let token = Cookies.get("clinic")
-    console.log(token, "This Is token for all Api's")
+       // console.log(token, "This Is token for all Api's")
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -355,7 +355,7 @@ export const ChangePasswordPatient = (values) => {
 export const AddTemplate = (values) => {
     const { TemplateName, Template } = values;
     let token = Cookies.get("clinic")
-    console.log(token, "This Is token for all Api's")
+       // console.log(token, "This Is token for all Api's")
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -383,7 +383,7 @@ export const AddTemplate = (values) => {
 export const EditTemplateer = (p_id) => {
     console.log(p_id, "A")
     let token = Cookies.get("clinic")
-    console.log(token, "This Is token for all Api's")
+       // console.log(token, "This Is token for all Api's")
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -404,7 +404,7 @@ export const EditTemplateer = (p_id) => {
 export const UpdateTemplate = (p_id, template_name, template) => {
     console.log(p_id, "TTTTTTTTTTTTTTTTTTTtt")
     let token = Cookies.get("clinic")
-    console.log(token, "This Is token for all Api's")
+       // console.log(token, "This Is token for all Api's")
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -430,7 +430,7 @@ export const UpdateTemplate = (p_id, template_name, template) => {
 
 export const DeleteTemplate = (id) => {
     let token = Cookies.get("clinic")
-    console.log(token, "This Is token for all Api's")
+       // console.log(token, "This Is token for all Api's")
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -451,7 +451,7 @@ export const DeleteTemplate = (id) => {
 
 export const GetAllTemplate = () => {
     let token = Cookies.get("clinic")
-    console.log(token, "This Is token for all Api's")
+       // console.log(token, "This Is token for all Api's")
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -472,7 +472,7 @@ export const GetAllTemplate = () => {
 
 export const FindPatientdataer = (formdata) => {
     let token = Cookies.get("clinic")
-    console.log(token, "This Is token for all Api's")
+       // console.log(token, "This Is token for all Api's")
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -496,7 +496,7 @@ export const FindPatientdataer = (formdata) => {
 
 export const BookAppointment = (formData) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
 
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -519,7 +519,7 @@ export const BookAppointment = (formData) => {
 
 export const GetTypeAppointment = () => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
 
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
@@ -540,7 +540,7 @@ export const GetTypeAppointment = () => {
 
 export const GetPatientAppointment = (patientName) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -561,7 +561,7 @@ export const GetPatientAppointment = (patientName) => {
 
 export const GetLocation = () => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -581,7 +581,7 @@ export const GetLocation = () => {
 
 export const GetEmployess = () => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -602,7 +602,7 @@ export const GetEmployess = () => {
 
 export const GetBilling = () => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -624,7 +624,7 @@ export const GetBilling = () => {
 
 export const GetBillingInvoice = (invoiceTitle, invoiceDate, selectedPatientId, description, amount) => {
     let token = Cookies.get("clinic"); // Assuming you have the Cookies library available
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     const randomInvoiceNumber = Math.floor(Math.random() * 1000) + 1;
 
     var myHeaders = new Headers();
@@ -671,7 +671,7 @@ export const GetBillingInvoice = (invoiceTitle, invoiceDate, selectedPatientId, 
 
 export const GetBillingCancel = (id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -698,7 +698,7 @@ export const GetBillingCancel = (id) => {
 
 export const UpdateManageClinicProfile = (clinic_name, img, email, phone, timezone) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -730,7 +730,7 @@ export const UpdateManageClinicProfile = (clinic_name, img, email, phone, timezo
 
 export const CreateNewUser = (values) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -772,7 +772,7 @@ export const CreateNewUser = (values) => {
 
 export const GetAllUSers = () => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -793,7 +793,7 @@ export const GetAllUSers = () => {
 
 export const AddSecurityGroup = (subject) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -819,7 +819,7 @@ export const AddSecurityGroup = (subject) => {
 
 export const GettSecurityData = () => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -839,7 +839,7 @@ export const GettSecurityData = () => {
 
 export const GettPatientHistoryData = (p_id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -859,7 +859,7 @@ export const GettPatientHistoryData = (p_id) => {
 
 export const editSecurityData = (p_id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -881,7 +881,7 @@ export const editSecurityData = (p_id) => {
 export const UpdateSecurity = (id, name) => {
     console.log(id, "wwwwwwwwwwwwwwwwwwwwwww")
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -907,7 +907,7 @@ export const UpdateSecurity = (id, name) => {
 
 export const deleteSecurity = (id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -928,7 +928,7 @@ export const deleteSecurity = (id) => {
 
 export const GetSingleClinicUser = (p_id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -949,7 +949,7 @@ export const GetSingleClinicUser = (p_id) => {
 export const updateUserData = (p_id, role, username, prefix, name, lname, email, phone, password, security_group, doc_license, signature, state) => {
     console.log("Thcgvsbndsxzfhdgxcgfwdhjz", p_id, role, username, prefix, name, lname, email, phone, password, security_group, doc_license, signature, state)
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -990,7 +990,7 @@ export const updateUserData = (p_id, role, username, prefix, name, lname, email,
 
 export const GetAllSecurityLocation = () => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1011,7 +1011,7 @@ export const GetAllSecurityLocation = () => {
 export const AddSecurityLocation = (values) => {
     const { LocationName, LocationPhoneNumber, AddressLine, AddressLine1, City, PostalCode, AdditionalInstructions, State } = values;
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1044,7 +1044,7 @@ export const AddSecurityLocation = (values) => {
 
 export const GetSingleSecondaryLocation = (p_id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1064,7 +1064,7 @@ export const GetSingleSecondaryLocation = (p_id) => {
 
 export const UpdateSecondaryLocation = (p_id, name, phone, address1, address2, state, city, postalCode, instruction) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1097,7 +1097,7 @@ export const UpdateSecondaryLocation = (p_id, name, phone, address1, address2, s
 
 export const DeleteSecondaryLoaction = (id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1120,7 +1120,7 @@ export const DeleteSecondaryLoaction = (id) => {
 export const AddAppointmentTypedes = (values) => {
     const { Name, Length } = values;
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1147,7 +1147,7 @@ export const AddAppointmentTypedes = (values) => {
 
 export const GetSingleAppointmentType = (p_id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1167,7 +1167,7 @@ export const GetSingleAppointmentType = (p_id) => {
 
 export const UpdateAppointmentType = (p_id, name, length) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1194,7 +1194,7 @@ export const UpdateAppointmentType = (p_id, name, length) => {
 
 export const DeleteAppointmentType = (id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1216,7 +1216,7 @@ export const DeleteAppointmentType = (id) => {
 
 export const GetSinglePAtient = (p_id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1237,7 +1237,7 @@ export const GetSinglePAtient = (p_id) => {
 
 export const getNotesData = (p_id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1258,7 +1258,7 @@ export const getNotesData = (p_id) => {
 export const ADDNotes = (subject, p_id) => {
 
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1286,7 +1286,7 @@ export const ADDNotes = (subject, p_id) => {
 
 export const DeleteNotes = (id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1308,7 +1308,7 @@ export const DeleteNotes = (id) => {
 
 export const GetSingleNotes = (id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1328,7 +1328,7 @@ export const GetSingleNotes = (id) => {
 
 export const UpdateNotes = (p_id, note) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1355,7 +1355,7 @@ export const UpdateNotes = (p_id, note) => {
 
 export const getDOContactList = (p_id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1376,7 +1376,7 @@ export const getDOContactList = (p_id) => {
 export const ADDDOContactList = (p_id, FirstName, LastName, Relationship) => {
 
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1405,7 +1405,7 @@ export const ADDDOContactList = (p_id, FirstName, LastName, Relationship) => {
 
 export const DeleteDOContactList = (id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1427,7 +1427,7 @@ export const DeleteDOContactList = (id) => {
 
 export const GetSingleDOContactList = (p_id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1447,7 +1447,7 @@ export const GetSingleDOContactList = (p_id) => {
 
 export const UpdateDOContactList = (p_id, fname, lname, relationship) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1475,7 +1475,7 @@ export const UpdateDOContactList = (p_id, fname, lname, relationship) => {
 
 export const GetClinicShedule = () => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1497,7 +1497,7 @@ export const GetClinicShedule = () => {
 
 export const ADDClinicShedule = (DoctorID, Day, Start, Stop) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1526,7 +1526,7 @@ export const ADDClinicShedule = (DoctorID, Day, Start, Stop) => {
 
 export const DeleteCLinicShedule = (id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1547,7 +1547,7 @@ export const DeleteCLinicShedule = (id) => {
 
 export const GEtSingleCliniocShedule = (id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1567,7 +1567,7 @@ export const GEtSingleCliniocShedule = (id) => {
 
 export const UPdateCLincicShedule = (id, dotw, doctor_id, start, stop) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1597,7 +1597,7 @@ export const UPdateCLincicShedule = (id, dotw, doctor_id, start, stop) => {
 
 export const GetAppointmtentREwie = () => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1618,7 +1618,7 @@ export const GetAppointmtentREwie = () => {
 // 12-08-2023
 export const GetAllPatientFiles = (p_id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1638,7 +1638,7 @@ export const GetAllPatientFiles = (p_id) => {
 
 export const ADDPatientFiles = (p_id, names, fileI, isVisibleToPatient) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1671,7 +1671,7 @@ export const ADDPatientFiles = (p_id, names, fileI, isVisibleToPatient) => {
 
 export const DEeletPatientFiles = (id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1691,7 +1691,7 @@ export const DEeletPatientFiles = (id) => {
 
 export const EDITPatientFiles = (id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1710,7 +1710,7 @@ export const EDITPatientFiles = (id) => {
 }
 export const UpdatePatientFiles = (name, img, id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1739,7 +1739,7 @@ export const UpdatePatientFiles = (name, img, id) => {
 
 export const getCertificate = (p_id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1759,7 +1759,7 @@ export const getCertificate = (p_id) => {
 
 export const AddCertificate = (p_id, CertificateDate, CertificateExpiry, Diagnoses, Notes, InternalNotes, selectedDoctorId) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1791,7 +1791,7 @@ export const AddCertificate = (p_id, CertificateDate, CertificateExpiry, Diagnos
 
 export const DeleteCertificate = (id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1814,7 +1814,7 @@ export const DeleteCertificate = (id) => {
 export const GetCertficateOrder = () => {
 
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1836,7 +1836,7 @@ export const GetCertficateOrder = () => {
 
 export const ADDCERTIFICATEORDER = (StartDate, EXPIRE) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1870,7 +1870,7 @@ export const ADDCERTIFICATEORDER = (StartDate, EXPIRE) => {
 
 export const DeleteCertificateOrder = (id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1891,7 +1891,7 @@ export const DeleteCertificateOrder = (id) => {
 
 export const GEtReportClinicSheduleToday = () => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1912,7 +1912,7 @@ export const GEtReportClinicSheduleToday = () => {
 
 export const GetTodayClinicSheduleFilter = (Date, TodayDoctorID) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -1940,7 +1940,7 @@ export const GetTodayClinicSheduleFilter = (Date, TodayDoctorID) => {
 
 export const AddExamination = (p_id, StartDate, TYpe, DiscussedAlternatives, EvaluationCriteria, ORT, DSD, PAINSCALE, AdverseEvents, Absolute, Relative, ReviewMedi, ReviewAlergy, ReviewPmh, HPI, Height, HeightUnit, Weight, WeightUnit, Pulse, Temperature, TemperatureUnit, BloodPreasure, RespiratoryRate, BMI, Waist, WaistUnit, MotorTone, Reflexes, PhyGeneral, PhyCardio, PhyGastro, PhyGenit, PhyHeent, PhyIntegumentary, PhyMusculoskeletal, PhyNeuro, PhySpecific) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -2013,7 +2013,7 @@ export const AddExamination = (p_id, StartDate, TYpe, DiscussedAlternatives, Eva
 
 export const GetExaminationData = (p_id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -2036,7 +2036,7 @@ export const GetExaminationData = (p_id) => {
 
 export const UpdatePatientData = (id, name, mname, lname, prefername, dob, phone, state, address, address2, pincode, city, email, registry_id, social_security, img, gender, emergency, referring_doc, doctor_state, doctor_phone, doc_license) => {
     let token = Cookies.get("clinic")
-    console.log(token, "This Is token for all Api's")
+       // console.log(token, "This Is token for all Api's")
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -2083,7 +2083,7 @@ export const UpdatePatientData = (id, name, mname, lname, prefername, dob, phone
 
 export const AddInformedData = (id, DoctorID, WithNessID, WithNessName, WithNessPatient, WithNessSign, PatientName) => {
     let token = Cookies.get("clinic")
-    console.log(token, "This Is token for all Api's")
+       // console.log(token, "This Is token for all Api's")
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -2118,7 +2118,7 @@ export const AddInformedData = (id, DoctorID, WithNessID, WithNessName, WithNess
 export const GetInformentDocumnt = (p_id) => {
 
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -2140,7 +2140,7 @@ export const GetInformentDocumnt = (p_id) => {
 export const GetMedicalNecessity = (p_id) => {
 
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -2162,7 +2162,7 @@ export const GetMedicalNecessity = (p_id) => {
 
 export const certificates_report_filter = async (ExpStartDate, ExpEndDate, StartDate, EndDate) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -2191,7 +2191,7 @@ export const certificates_report_filter = async (ExpStartDate, ExpEndDate, Start
 
 export const AddICDCode = (p_id, Code) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -2222,7 +2222,7 @@ export const AddICDCode = (p_id, Code) => {
 export const GetICDCODE = (p_id) => {
 
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -2245,7 +2245,7 @@ export const GetICDCODE = (p_id) => {
 
 export const DeleteICDCode = (id) => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -2264,7 +2264,7 @@ export const DeleteICDCode = (id) => {
 }
 export const AllAppointmentDetails = () => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -2284,7 +2284,7 @@ export const AllAppointmentDetails = () => {
 
 export const GetUpcommingAppointment = () => {
     let token = Cookies.get("clinic");
-    console.log(token, "This Is token for all Api's");
+       // console.log(token, "This Is token for all Api's");
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -2304,7 +2304,7 @@ export const GetUpcommingAppointment = () => {
 
 export const GetSingleAppp = (eventId) => {
     let token = Cookies.get("clinic")
-    console.log(token, "This Is token for all Api's")
+       // console.log(token, "This Is token for all Api's")
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -2327,7 +2327,7 @@ export const GetSingleAppp = (eventId) => {
 export const inpatient = (p_id) => {
     console.log(p_id, "get_clinic_appointment_inpatient")
     let token = Cookies.get("clinic")
-    console.log(token, "This Is token for all Api's")
+       // console.log(token, "This Is token for all Api's")
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);

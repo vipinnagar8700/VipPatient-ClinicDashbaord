@@ -4,7 +4,7 @@ import 'react-grid-layout/css/styles.css';
 import './fonts/icomoon/style.css';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
-import '@assets/css/style.css'
+import '@assets/css/style.css';
 // components
 import AppLayout from './AppLayout';
 import { SnackbarProvider } from 'notistack';

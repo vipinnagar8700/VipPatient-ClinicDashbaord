@@ -125,13 +125,13 @@ const DashboardK = () => {
                     </Grid>
                 </Grid>
                 <Grid container>
-                    <Grid items sx={12} md={6}>
+                    <Grid items xs={12} md={6} >
 
                         <div style={{ margin: '4px' }} key="events-compact">
                             <ClinicActivity />
                         </div>
                     </Grid>
-                    <Grid items sx={12} md={6}>
+                    <Grid items xs={12} md={6}>
 
                         <div style={{ margin: '4px' }} key="health-index">
                             <UpcommingAppointment />

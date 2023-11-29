@@ -80,7 +80,7 @@ const AppointmentDataList = () => {
     const parsedData = JSON.parse(dataFromLocalStorage);
 
     // Now, "parsedData" will contain the full object with all the properties that were originally present in the `data` object
-    console.log(parsedData, "AL Data AAAAAAAAAAAAAAAAAAAAA");
+    // console.log(parsedData, "AL Data AAAAAAAAAAAAAAAAAAAAA");
 
     const ValueID = parsedData.id;
     const ClinicID = parsedData.clinic_id;
@@ -108,14 +108,14 @@ const AppointmentDataList = () => {
 
     const handleSubmit = (event, id) => {
         let token = Cookies.get("clinic");
-        console.log(token, "This Is token for all Api's");
+        // console.log(token, "This Is token for all Api's");
         event.preventDefault();
         var myHeaders = new Headers();
         myHeaders.append("Accept", "application/json");
         myHeaders.append("Authorization", `Bearer ${token}`);
 
         var formdata = new FormData();
-        console.log(selectedPatientId, "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
+        // console.log(selectedPatientId, "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
         formdata.append("patient_id", selectedPatientId);
         formdata.append("doctor_id", employeeId);
         formdata.append("clinic_id", ClinicID);
@@ -136,7 +136,7 @@ const AppointmentDataList = () => {
         return fetch(`${Url}/api/clinic_appointment`, requestOptions)
             .then((res) => res.json())
             .then((json) => {
-                console.log(json, "anjkhgdchjm");
+                // console.log(json, "anjkhgdchjm");
                 enqueueSnackbar(json.messege, {
                     variant: 'success',
                     anchorOrigin: {
@@ -162,7 +162,7 @@ const AppointmentDataList = () => {
 
     const handleAcceptAppointment = (id) => {
         let token = Cookies.get("clinic");
-        console.log(token, "This Is token for all Api's");
+        // console.log(token, "This Is token for all Api's");
 
         var myHeaders = new Headers();
         myHeaders.append("Accept", "application/json");
@@ -184,7 +184,7 @@ const AppointmentDataList = () => {
         return fetch(`${Url}/api/accept_appointment`, requestOptions)
             .then((res) => res.json())
             .then((json) => {
-                console.log(json, "anjkhgdchjm");
+                // console.log(json, "anjkhgdchjm");
                 enqueueSnackbar(json.messege, {
                     variant: 'success',
                     anchorOrigin: {
@@ -192,7 +192,7 @@ const AppointmentDataList = () => {
                         horizontal: 'right',
                     },
                 });
-                window.location.reload()
+                // window.location.reload()
             })
             .catch((error) => {
                 // Handle errors (e.g., show an error message)
@@ -226,19 +226,19 @@ const AppointmentDataList = () => {
             try {
                 // Get the clinic ID from where it's available, or define it properly
                 const Filerpatient = await GetPatientAppointment(patientName);
-                console.log(Filerpatient, "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIii");
+                // console.log(Filerpatient, "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIii");
 
                 if (Filerpatient) {
                     // Here, we check if Filerpatient is an object with a "then" function (i.e., a Promise).
                     if (typeof Filerpatient.then === 'function') {
                         // If it's a Promise, we use "await" to get the resolved data.
                         const data = await Filerpatient;
-                        console.log(data.results, "AAAAAAAAAAAAAA");
+                        // console.log(data.results, "AAAAAAAAAAAAAA");
                         setFilteredOptions(data.results)
                     } else {
-                        console.log(Filerpatient.results?.[0]?.name, "AAAAAAAAAAAAAA");
+                        // console.log(Filerpatient.results?.[0]?.name, "AAAAAAAAAAAAAA");
                         setFilteredOptions(Filerpatient.results)
-                        console.log(Filerpatient.results, "UUUUUUUUUUUUUUUuu")
+                        // console.log(Filerpatient.results, "UUUUUUUUUUUUUUUuu")
                     }
                 }
             } catch (error) {
@@ -253,7 +253,7 @@ const AppointmentDataList = () => {
         let TyoeData = GetTypeAppointment()
         if (TyoeData) {
             TyoeData.then((data) => {
-                console.log(data.result)
+                // console.log(data.result)
                 setTTT(data.result)
             })
         }
@@ -284,7 +284,7 @@ const AppointmentDataList = () => {
         let TyoeData = GetLocation()
         if (TyoeData) {
             TyoeData.then((data) => {
-                console.log(data.result)
+                // console.log(data.result)
                 setGetLoc(data.result)
             })
         }
@@ -294,7 +294,7 @@ const AppointmentDataList = () => {
         let TyoeData = GetAllUSers()
         if (TyoeData) {
             TyoeData.then((data) => {
-                console.log(data.result)
+                // console.log(data.result)
                 setGetEmp(data.result)
             })
         }
@@ -310,7 +310,8 @@ const AppointmentDataList = () => {
 
         if (ALLAPPOINTMENTREW) {
             ALLAPPOINTMENTREW.then((data) => {
-                console.log(data?.result, "IIIIIIIIIIIIIIIIIIIIIIIIII")
+                // console.log(data, "i")
+                // console.log(data?.result, "j")
                 setPost(data?.result)
             })
         }
@@ -367,12 +368,24 @@ const AppointmentDataList = () => {
             cell: (row) => (
                 <>
 
-                    <button style={{ width: '210px', backgroundColor: '#2BAA27', height: '35px', borderRadius: 4, color: 'white', fontWeight: 600 }} sx={{ fontWeight: 300 }} >
-                        <Link onClick={() => openModal(row.id)}    >
-                            Create Appointment
+                    <button
+                        style={{
+                            width: '210px',
+                            height: '35px',
+                            borderRadius: 4,
+                            color: 'white',
+                            fontWeight: 600,
+                            backgroundColor: row.status === 'complete' ? '#BF1E2E' : '#2BAA27',
+                        }}
+                        sx={{ fontWeight: 300 }}
+                        disabled={row.status === 'complete'}
+                        onClick={() => row.status !== 'complete' && openModal(row.id)}
+                    >
+                        <Link >
+                            {row.status === 'complete' ? 'Completed' : 'Create Appointment'}
                         </Link>
-
                     </button>
+
 
                 </>
             ),

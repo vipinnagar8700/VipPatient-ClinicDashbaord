@@ -299,7 +299,7 @@ const Form = ({ type }) => {
 
                         <Stack direction='row'>
                             <Box sx={{ border: '1px solid #C4C4C4', borderRadius: 2, padding: 1 }}>
-                                <input
+                                <input style={{width:'100%'}}
                                     type="file"
                                     accept="image/*"
                                     onChange={(e) => setEditProfile({ ...editProfile, img: e.target.files[0] })}
@@ -324,7 +324,7 @@ const Form = ({ type }) => {
                         <Stack direction='row'>
                             <Box sx={{ border: '1px solid #C4C4C4', borderRadius: 2, padding: 1 }}>
                                 <input
-                                    type="file"
+                                    type="file" style={{width:'100%'}}
                                     accept="image/*"
                                     onChange={(e) => setEditProfile({ ...editProfile, signature: e.target.files[0] })}
                                 />

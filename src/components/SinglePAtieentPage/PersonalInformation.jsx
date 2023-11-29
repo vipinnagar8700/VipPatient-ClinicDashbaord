@@ -210,12 +210,14 @@ const PersonalInformation = ({ type }) => {
                 <Grid item xs={6}>
                   <InputLabel htmlFor={`${type}ProfileBirthday`}>State</InputLabel>
 
-                  <select id="patient_add_referringDoctorState" style={{ maxWidth: '100%', // Use a percentage for maximum width
-                      padding: '10px',
-                      fontSize: '15px',
-                      borderRadius: '4px',
-                      minWidth: '100px', // Use a minimum width that fits your content
-                      width: '100%', }} labelId="dropdown-label"
+                  <select id="patient_add_referringDoctorState" style={{
+                    maxWidth: '100%', // Use a percentage for maximum width
+                    padding: '10px',
+                    fontSize: '15px',
+                    borderRadius: '4px',
+                    minWidth: '100px', // Use a minimum width that fits your content
+                    width: '100%',
+                  }} labelId="dropdown-label"
                     fullWidth
                     size='small'
                     value={state} onChange={(e) => {
@@ -310,12 +312,14 @@ const PersonalInformation = ({ type }) => {
                 <Grid item xs={6}>
                   <InputLabel htmlFor={`${type}ProfileBirthday`}>Referring Doctor State</InputLabel>
                   {/* <TextField id={`${type}ProfileAddress2`} title="Referring Doctor State" size="small" onChange={handleChange} onBlur={handleBlur} placeholder="Referring Doctor State" fullWidth value={values.Doctor_State} name="Doctor_State" /> */}
-                  <select id="patient_add_referringDoctorState" style={{  maxWidth: '100%', // Use a percentage for maximum width
-                      padding: '10px',
-                      fontSize: '15px',
-                      borderRadius: '4px',
-                      minWidth: '100px', // Use a minimum width that fits your content
-                      width: '100%', }} labelId="dropdown-label"
+                  <select id="patient_add_referringDoctorState" style={{
+                    maxWidth: '100%', // Use a percentage for maximum width
+                    padding: '10px',
+                    fontSize: '15px',
+                    borderRadius: '4px',
+                    minWidth: '100px', // Use a minimum width that fits your content
+                    width: '100%',
+                  }} labelId="dropdown-label"
                     fullWidth
                     size='small'
                     value={doctor_state} onChange={(e) => {
@@ -432,7 +436,7 @@ const PersonalInformation = ({ type }) => {
                   <Stack direction='row'>
                     <Box sx={{ border: '1px solid #C4C4C4', borderRadius: 2, padding: 1 }}>
                       <input
-                        type="file"
+                        type="file" style={{ width: '100%' }}
                         accept="image/*"
                         onChange={(e) => setpre({ ...pre, img: e.target.files[0] })}
                       />

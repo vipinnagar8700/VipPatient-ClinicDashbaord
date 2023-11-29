@@ -1,3 +1,6 @@
+import { LogoutProfile } from "@components/Api/AllApi";
+
+
 export const menu = [
     {
         icon: 'blocks',
@@ -80,80 +83,37 @@ export const menu = [
         link: 'https://help.statepass.com/'
     },
 
+   
     {
-        // icon: 'wallet',
-        // name: 'Logout',
-        // link: '#'
-    },
-
-    // {
-    //     icon: 'calendar',
-    //     name: 'Shop Online',
-    //     link: '/doctor_reviews'
-    // },
-    // {
-    //     icon: 'wallet',
-    //     name: 'My Orders',
-    //     link: '/patient_reviews'
-    // },
-
-
-
-    // {
-    //     cat: 'dashboard',
-    //     icon: 'blocks',
-    //     links: [
-    //         { name: "Dashboard A", link: '/dashboard_a' },
-    //         { name: "Dashboard B", link: '/dashboard_b' },
-    //         { name: "Dashboard C", link: '/dashboard_c' },
-    //         { name: "Dashboard D", link: '/dashboard_d' },
-    //         { name: "Dashboard E", link: '/dashboard_e' },
-    //         { name: "Dashboard F", link: '/dashboard_f' },
-    //         { name: "Dashboard G", link: '/dashboard_g' },
-    //         { name: "Dashboard H", link: '/dashboard_h' },
-    //         { name: "Dashboard I", link: '/dashboard_i' },
-    //         { name: "Dashboard J", link: '/dashboard_j' },
-    //         { name: "Dashboard K", link: '/dashboard_k' },
-    //         { name: "Page 404", link: '/404' },
-    //     ]
-    // },
-    // {
-    //     cat: 'appointments',
-    //     icon: 'calendar',
-    //     links: [
-    //         { name: "Patient Appointments", link: '/patient_appointments' },
-    //         { name: "Doctor Appointments", link: '/doctor_appointments' }
-    //     ]
-    // },
-
-    // {
-    //     cat: 'doctors',
-    //     icon: 'stethoscope',
-    //     links: [
-    //         { name: "Doctors", link: '/doctors' },
-    //         { name: "Staff", link: '/staff' }
-    //     ]
-    // },
-    // {
-    //     cat: 'messages',
-    //     icon: 'comment',
-    //     links: [
-    //         { name: "Doctor Messenger", link: '/doctor_messenger' },
-    //         { name: "Patient Messenger", link: '/patient_messenger' }
-    //     ]
-    // },
-    // {
-    //     cat: 'reviews',
-    //     icon: 'star',
-    //     links: [
-    //         { name: "Doctor Reviews", link: '/doctor_reviews' },
-    //         { name: "Patient Reviews", link: '/patient_reviews' }
-    //     ]
-    // },
-    {
-        // icon: 'wallet',
-        // name: 'Finances',
-        // link: '/finances'
+        icon: 'wallet',
+        name: 'Logout',
+        onClick: () => Logout(),
     },
 
 ]
+
+const Logout = async () => {
+
+
+    const response = await LogoutProfile();
+    console.log(response);
+
+    if (response && response.message === "Successfully logged out") {
+        alert("Successfully Logout!");
+
+        // Clear local storage
+        localStorage.removeItem("clinic");
+
+        // Clear cookies
+        document.cookie.split(';').forEach(function (cookie) {
+            var name = cookie.split('=')[0].trim();
+            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        });
+
+        // Navigate to the desired location
+        window.location.href = '/Login';
+    } else {
+        alert("Logout failed. Please try again.");
+    }
+
+};

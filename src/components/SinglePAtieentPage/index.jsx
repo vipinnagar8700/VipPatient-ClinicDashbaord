@@ -100,8 +100,8 @@ const PatientSinglePage = ({ type }) => {
 
 
     return (
-
-
+    
+    
         <>
             <Sidebar />
             <Panel />
@@ -115,8 +115,6 @@ const PatientSinglePage = ({ type }) => {
                                 <Tab label="Chart" value="1" />
                             </TabList>
                         </Box>
-
-
                         <TabPanel value="0">
                             <Grid container spacing={2}>
                                 <Overview />

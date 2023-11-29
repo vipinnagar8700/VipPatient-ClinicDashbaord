@@ -7,7 +7,7 @@ import Room from "./Room";
 
 const VideoChat = ({ user, handleOpen }) => {
   const { id, clinic_id } = user;
-  console.log(id, clinic_id, "UUUUUUUUUUUUUUUUUUUUUUUUUUUUU")
+  // console.log(id, clinic_id, "UUUUUUUUUUUUUUUUUUUUUUUUUUUUU")
   const [username, setUsername] = useState(id);
   const [roomName, setRoomName] = useState(clinic_id);
   useEffect(() => {

@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { Avatar } from '@mui/material';
 
-const User = ({ data, user, onUserSelect, setModal }) => {
+const User = ({ data, user, onUserSelect, setModal, getAllChat }) => {
 
 
     const [post, setPost] = useState(null)
@@ -27,7 +27,7 @@ const User = ({ data, user, onUserSelect, setModal }) => {
         const fetchData = async () => {
             try {
                 const response = await GetAllPatientData();
-                console.log(response, "ALL USERS DATA FOR MESSAGE9911118");
+                // console.log(response, "ALL USERS DATA FOR MESSAGE9911118");
                 setPost(response?.result || null);
             } catch (error) {
                 // Handle error here

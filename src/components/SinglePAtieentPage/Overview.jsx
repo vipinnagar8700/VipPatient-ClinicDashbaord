@@ -13,7 +13,8 @@ import { Grid, Stack, TextField, InputLabel, Box, Avatar } from '@mui/material';
 import PaymentHistory from './PaymentHostory';
 import MostRecentAppointment from './MostRecentAppointment';
 import Url from 'url/Allurl';
-
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 
 
@@ -36,6 +37,9 @@ const Style = {
 
 
 const Overview = () => {
+    const theme = useTheme();
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
     const [Sec, setSec] = useState(false)
     const [selectedTab, setSelectedTab] = useState('');
     const [openModal, setOpenModal] = useState(false);
@@ -266,8 +270,8 @@ const Overview = () => {
         <>
             {
                 showpa &&
-                <Box sx={{ zIndex: "9999999", position: "fixed", top: 0, left: 0, width: "100%", minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center", bgcolor: "rgba(0,0,0,.4)" }}>
-                    <Box sx={{ minWidth: "500px", maxWidth: "500px", p: 2, bgcolor: "#fff" }}>
+                <Box sx={{ zIndex: "9999999", position: "fixed", top: 0, left: 0, width: "100%", minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center", bgcolor: "rgba(0,0,0,.4)", ...(isSmallScreen && { width: "100%", flexDirection: "column" }), }}>
+                    <Box sx={{  maxWidth: "500px", p: 2, bgcolor: "#fff", ...(isSmallScreen && { width: "90%" }), }}>
 
                         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                             <Box>Add Notes</Box>
@@ -315,7 +319,7 @@ const Overview = () => {
             {
                 showpau &&
                 <Box sx={{ zIndex: "9999999", position: "fixed", top: 0, left: 0, width: "100%", minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center", bgcolor: "rgba(0,0,0,.4)" }}>
-                    <Box sx={{ minWidth: "500px", maxWidth: "500px", p: 2, bgcolor: "#fff" }}>
+                    <Box sx={{ maxWidth: "500px", p: 2, bgcolor: "#fff" }}>
 
                         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                             <Box>Update Note</Box>
@@ -355,7 +359,7 @@ const Overview = () => {
                 </Box>
             }
             <Grid container>
-                <Grid items xs={4}>
+                <Grid items xs={12} md={4}>
                     <Card>
                         <CardContent>
                             <Avatar src={`${Url}/public/uploads/images/${AS.img}`} sx={{ width: 150, height: 150, mx: 'auto', my: 2 }} />
@@ -382,7 +386,7 @@ const Overview = () => {
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid items xs={8}>
+                <Grid items xs={12} md={8}>
                     <Card>
                         <CardContent>
                             <Typography variant="subtitle1" color="text.secondary" sx={{ textAlign: 'center', mb: 1, fontSize: 13 }}>

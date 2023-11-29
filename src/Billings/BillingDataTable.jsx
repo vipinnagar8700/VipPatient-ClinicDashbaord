@@ -23,7 +23,7 @@ const BillingDataTable = () => {
   const [openModal, setOpenModal] = useState(false);
   const smallScreen = window.matchMedia('(max-width: 1038.98px)').matches;
   const [PatientSData, setPatientSData] = useState([])
-  const [count,setCount] = useState(0)
+  const [count, setCount] = useState(0)
 
   const handleModalClose = () => {
     setOpenModal(false);
@@ -44,22 +44,22 @@ const BillingDataTable = () => {
         enqueueSnackbar(response.messege, {
           variant: 'success',
           anchorOrigin: {
-              vertical: 'top',
-              horizontal: 'right',
+            vertical: 'top',
+            horizontal: 'right',
           },
-      });
+        });
         setCount(count + 1)
       })
       .catch((error) => {
         // Handle errors (e.g., show an error message)
         enqueueSnackbar(error, "error to Cancel data!", {
-            variant: 'error',
-            anchorOrigin: {
-                vertical: 'top',
-                horizontal: 'right',
-            },
+          variant: 'error',
+          anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'right',
+          },
         });
-    });
+      });
   };
 
   useEffect(() => {
@@ -116,13 +116,13 @@ const BillingDataTable = () => {
             </Link>
 
           </button>
-          <button style={{ width: '110px', backgroundColor: 'red', height: '35px', borderRadius: 4, color: 'white', fontWeight: 600,marginLeft:2 }}  >
-
-            <Link to="#" onClick={() => handleDeleteInvoice(row.id)}>
-              Cancel Invoice
-            </Link>
-
-          </button>
+          {row.status !== 'cancelled' && (
+            <button style={{ width: '110px', backgroundColor: '#BF1E2E', height: '35px', borderRadius: 4, color: 'white', fontWeight: 600, marginLeft: 2 }}>
+              <Link to="#" onClick={() => handleDeleteInvoice(row.id)}>
+                Cancel Invoice
+              </Link>
+            </button>
+          )}
         </>
       ),
       button: true,
@@ -153,8 +153,8 @@ const BillingDataTable = () => {
 
   return (
     <>
-    <Sidebar/>
-    <Panel/>
+      <Sidebar />
+      <Panel />
       <Page title="Billing">
         <div key="balance">
           <Card sx={{ minWidth: 1175, '@media screen and (max-width: 1400px)': { minWidth: '100%' } }}>

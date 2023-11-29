@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { InputLabel, TextField, Box,Stack } from '@mui/material';
 import Sidebar from '@layout/Sidebar';
 import Panel from '@layout/Panel';
+import DoctorCureRate from '@widgets/DoctorCureRate';
 
 
 
@@ -99,28 +100,11 @@ const NewPatientReport = () => {
                 <div key="balance">
                     <Card sx={{ minWidth: 1175, '@media screen and (max-width: 1400px)': { minWidth: '100%' } }}>
                         <CardContent>
-                            <Typography sx={{ fontSize: 18, fontWeight: 400 }} color="text.secondary" gutterBottom>
-                            New Patient Report
-                            </Typography>
-                            <Stack direction='row' spacing={4} sx={{alignItems:'center'}}>
-                                <InputLabel>Select Date</InputLabel>
-                                <TextField size='small'/>
-                                <InputLabel>Appointments w/</InputLabel>
-                                <TextField size='small'/>
-                                <button style={{backgroundColor:'#31C22C',borderRadius:8,width:'180px',height:40,color:'white'}}>Filter Results</button>
-                            </Stack>
-
+                           
 
                             <Card sx={{ minWidth: 1145, '@media screen and (max-width: 1400px)': { minWidth: '100%' }, backgroundColor: '#F1F5F8' }}>
                                 <CardContent>
-                                    <Typography sx={{ fontSize: 16, fontWeight: 300 }} color="text.secondary" gutterBottom>
-                                        0 total Clinic Daily Schedule Report found
-                                    </Typography>
-                                    <div className="Order Page">
-                                        <DataTableExtensions {...tableData} export={false} print={false}>
-                                            <DataTable noHeader defaultSortField="id" defaultSortAsc={false} pagination highlightOnHover />
-                                        </DataTableExtensions>
-                                    </div>
+                                <DoctorCureRate /> 
                                 </CardContent>
                             </Card>
                         </CardContent>

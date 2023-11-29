@@ -50,8 +50,9 @@ import HomePage from '@components/HomePage';
 import VideoChat from '@components/Messenger/Header';
 import VideoChata from '@components/Messenger/Header/VideoChat';
 import ClinicProtectRoute from 'ClinicProtectRoute';
-
-// pages
+import ForgotPassworded from '@components/ForgotPassworded';
+import ResetPasswordPage from '@components/ResetPassword';
+// pages@components/ForgotPassworded
 const DashboardA = lazy(() => import('@pages/DashboardA'));
 const DashboardB = lazy(() => import('@pages/DashboardB'));
 const DashboardC = lazy(() => import('@pages/DashboardC'));
@@ -86,7 +87,8 @@ const AppLayout = () => {
     const { width } = useWindowSize();
     const isMobile = width < 768;
     const location = useLocation();
-    const className = location.pathname === '/' || location.pathname === '/Login' ? '' : 'app';
+    const validPaths = ['/', '/Login', '/forgot-password', '/reset-forgot-password/:token'];
+    const className = validPaths.includes(location.pathname) ? '' : 'app';
 
     useEffect(() => {
         if (appRef.current) {
@@ -102,8 +104,11 @@ const AppLayout = () => {
                 {/* <Panel /> */}
                 <Suspense fallback={<WidgetsLoader />}>
                     <Routes>
+
                         <Route path="/" element={<Navigate to="/Login" />} />
                         <Route path="/Login" element={<Login />} />
+                        <Route path="/forgot-password" element={<ForgotPassworded />} />
+                        <Route path="/reset-forgot-password/:token" element={<ResetPasswordPage />} />
 
                         <Route path="/jhgv" element={<HomePage />} />
 

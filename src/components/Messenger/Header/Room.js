@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Participant from "./Participant";
 import CallEndIcon from '@mui/icons-material/CallEnd';
-import { Avatar, Stack, Typography,Box } from "@mui/material";
+import { Avatar, Stack, Typography, Box } from "@mui/material";
 
 const Room = ({ roomName, room, handleLogout }) => {
   const [participants, setParticipants] = useState([]);
+  const [isRinging, setIsRinging] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
     const participantConnected = (participant) => {
       setParticipants((prevParticipants) => [...prevParticipants, participant]);
+      if (!room.localParticipant) {
+        // Assume incoming call if localParticipant doesn't exist
+        setIsRinging(true);
+        // Add ringtone logic here
+      }
     };
 
     const participantDisconnected = (participant) => {
@@ -30,6 +37,21 @@ const Room = ({ roomName, room, handleLogout }) => {
     <Participant key={participant.sid} participant={participant} />
   ));
 
+
+  const toggleMute = () => {
+    const audioTracks = room.localParticipant.audioTracks;
+    audioTracks.forEach((audioTrack) => {
+      audioTrack.isEnabled = !isMuted;
+    });
+    setIsMuted(!isMuted);
+  };
+
+  // const handleCallEnd = () => {
+  //   setIsRinging(false); // Stop the ringtone when call ends
+  //   handleLogout();
+  // };
+  // console.log(room.localParticipant.audioTracks,"iiii");
+
   return (
     <div className="room">
 
@@ -48,21 +70,30 @@ const Room = ({ roomName, room, handleLogout }) => {
       </div>
       {/* <h3>Patient  Name:</h3> */}
       <div className="remote-participants">{remoteParticipants}</div>
-      <Stack direction="row" gap={4} sx={{justifyContent:'center'}}>
+      <Stack direction="row" gap={4} sx={{ justifyContent: 'center' }}>
         {/* <Typography>Dr Name: {roomName}</Typography> */}
         <Box>
 
         </Box>
+
         <Box>
-        <Avatar
-          sx={{ backgroundColor: "red", }}
-          onClick={handleLogout}
-        >
-          <CallEndIcon />
-        </Avatar>
+          <Avatar
+            sx={{ backgroundColor: "red", }}
+            onClick={handleLogout}
+          >
+            <CallEndIcon />
+          </Avatar>
         </Box>
         <Box>
-          
+          <Avatar
+            sx={{ backgroundColor: isMuted ? "grey" : "green" }}
+            onClick={toggleMute}
+          >
+            {isMuted ? "🔇" : "🔊"}
+          </Avatar>
+        </Box>
+        <Box>
+
         </Box>
       </Stack>
     </div>

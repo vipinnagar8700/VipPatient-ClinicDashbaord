@@ -95,8 +95,8 @@ const UpcommingAppointment = () => {
     const data = PatientSData.map((item) => ({
         id: item?.id || '',
         name: item?.name || '',
-        mname: item?.patient?.[0]?.lname|| '',
-        lname: item?.doctor?.[0]?.lname|| '',
+        mname: item?.patient?.[0]?.lname || '',
+        lname: item?.doctor?.[0]?.lname || '',
         city: item?.patient?.[0]?.name || '',
         state: item?.doctor?.[0]?.name || '',
         created_at: item?.created_at || '',
@@ -114,12 +114,12 @@ const UpcommingAppointment = () => {
         //     <Page title="My Order">
         <>
             <div key="balance">
-                <Card sx={{ minWidth: 455, '@media screen and (max-width: 555px,)': { minWidth: '100%' } }}>
+                <Card sx={{ minWidth: '100%', '@media screen and (max-width: 555px,)': { minWidth: '100%' } }}>
                     <CardContent>
                         <Typography sx={{ fontSize: 18, fontWeight: 400 }} color="text.secondary" gutterBottom>
                             Upcoming Appointments
                         </Typography>
-                        <Card sx={{ minWidth: 455, '@media screen and (max-width: 555px,)': { minWidth: '100%' }, backgroundColor: '#F1F5F8' }}>
+                        <Card sx={{ minWidth: '100%', '@media screen and (max-width: 555px,)': { minWidth: '100%' }, backgroundColor: '#F1F5F8' }}>
                             <CardContent>
                                 <Typography sx={{ fontSize: 16, fontWeight: 300 }} color="text.secondary" gutterBottom>
                                     {PatientSData.length}  total Upcoming Appointments found

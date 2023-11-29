@@ -126,39 +126,7 @@ const ClininDailyReport = () => {
                             <Typography sx={{ fontSize: 18, fontWeight: 400 }} color="text.secondary" gutterBottom>
                                 Clinic Daily Schedule Report
                             </Typography>
-                            <Stack direction='row' spacing={4} sx={{ alignItems: 'center' }}>
-                                <InputLabel>Select Date</InputLabel>
-                                <TextField size='small' type='date' />
-                                <InputLabel >Appointments w/</InputLabel>
-                                <Select
-                                    // value={selectedDay}
-                                    // onChange={handleDoctorIDChange}
-                                    // fullWidth
-                                    sx={{ width: 200 }}
-                                    size="small"
-                                // displayEmpty
-                                >
-                                    <MenuItem value="" disabled>
-                                        Select a Doctor
-                                    </MenuItem>
-                                    {
-                                        post && post.map((data, index) => {
-                                            return (
-                                                <MenuItem key={index} value={data.id}>
-                                                    {data.name}
-                                                </MenuItem>
-
-                                            )
-
-                                        })
-                                    }
-
-
-                                </Select>
-                                <button style={{ backgroundColor: '#31C22C', borderRadius: 8, width: '180px', height: 40, color: 'white' }}>Filter Results</button>
-                            </Stack>
-
-
+                            
                             <Card sx={{ minWidth: 1145, '@media screen and (max-width: 1400px)': { minWidth: '100%' }, backgroundColor: '#F1F5F8' }}>
                                 <CardContent>
                                     <Typography sx={{ fontSize: 16, fontWeight: 300 }} color="text.secondary" gutterBottom>

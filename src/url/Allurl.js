@@ -1,2 +1,2 @@
-const Url = "https://phpstack-1152920-4040623.cloudwaysapps.com";
+const Url = "https://medical.skyerth.com";
 export default Url;

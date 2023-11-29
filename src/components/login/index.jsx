@@ -8,7 +8,6 @@ import {
   TextField,
   Checkbox,
   Button,
-  Link,
   Divider,
 } from '@mui/material';
 import Doctor from '../../assets/avatars/happy-doctor-holding-clipboard-with-patients.jpg'
@@ -18,7 +17,7 @@ import { useState } from 'react';
 import Cookies from 'js-cookie'; // Import the js-cookie library
 import { useNavigate } from 'react-router';
 import Url from 'url/Allurl';
-
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const navigate = useNavigate()
@@ -133,7 +132,7 @@ const Login = () => {
                 </Grid>
                 <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
                   <Typography variant="body2" fontWeight="bold">
-                    <Link href="#" > Forgot password? </Link>
+                    <Link to="/forgot-password" > Forgot password? </Link>
                   </Typography>
                 </Grid>
               </Grid>

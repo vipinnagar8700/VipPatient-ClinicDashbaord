@@ -26,17 +26,16 @@ import Url from 'url/Allurl';
 const Style = {
     position: 'absolute',
     top: '50%',
-    left: '50%',
+    // left: '50%',
     transform: 'translate(-50%, -50%)',
     // width: 600,
-    minWidth: 800,
+    minWidth: '100%',
     bgcolor: 'background.paper',
     border: '1px solid #f3f3f3',
     boxShadow: 24,
     p: 4,
     backgroundColor: "red",
     maxWidth: "100%",
-    minWidth: "500px",
 };
 
 
@@ -236,41 +235,34 @@ const DoctorsReviews = () => {
             }
 
 
-
-            <Page title="MMTCs">
-                <div key="balance">
-                    <Card sx={{ minWidth: 1175, '@media screen and (max-width: 1200px)': { minWidth: '100%' } }}>
+            <Card sx={{ '@media screen and (max-width: 1200px)': { minWidth: '100%' }, mt: 5, mx: 1 }}>
+                <CardContent>
+                    <Typography sx={{ fontSize: 18, fontWeight: 400 }} color="text.secondary" gutterBottom>
+                        MMTCs
+                    </Typography>
+                    <Card sx={{ '@media screen and (max-width: 1200px)': { minWidth: '100%' }, backgroundColor: '#F1F5F8' }}>
                         <CardContent>
-                            <Typography sx={{ fontSize: 18, fontWeight: 400 }} color="text.secondary" gutterBottom>
-                                MMTCs
-                            </Typography>
-                            <Card sx={{ minWidth: 1145, '@media screen and (max-width: 100px)': { minWidth: '100%' }, backgroundColor: '#F1F5F8' }}>
-                                <CardContent>
 
+                            <div className="Order Page">
+                                <DataTableExtensions export={false} print={false}
+                                    {...tableData}
+                                >
+                                    <DataTable
+                                        noHeader
+                                        defaultSortField="id"
+                                        defaultSortAsc={false}
+                                        pagination
+                                        highlightOnHover
+                                    />
+                                </DataTableExtensions>
+                            </div>
 
-                                    <div className="Order Page">
-                                        <DataTableExtensions export={false} print={false}
-                                            {...tableData}
-                                        >
-                                            <DataTable
-                                                noHeader
-                                                defaultSortField="id"
-                                                defaultSortAsc={false}
-                                                pagination
-                                                highlightOnHover
-                                            />
-                                        </DataTableExtensions>
-                                    </div>
-
-                                </CardContent>
-
-                            </Card>
                         </CardContent>
 
                     </Card>
-                </div>
+                </CardContent>
 
-            </Page>
+            </Card>
 
         </>
     )

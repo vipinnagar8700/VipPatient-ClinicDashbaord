@@ -17,12 +17,12 @@ const dataFromLocalStorage = localStorage.getItem("clinic");
 
 // Parse the JSON data back to an object
 const parsedData = JSON.parse(dataFromLocalStorage);
-console.log(parsedData, "AL Data AAAAAAAAAAAAAAAAAAAAA");
+// console.log(parsedData, "AL Data AAAAAAAAAAAAAAAAAAAAA");
 
 const ValueID = parsedData?.id;
 const ClinicID = parsedData?.clinic_id;
-console.log(ValueID, "This IS Clinic Single ID")
-console.log(ClinicID, "This IS Clinic  ID")
+// console.log(ValueID, "This IS Clinic Single ID")
+// console.log(ClinicID, "This IS Clinic  ID")
 const CancelAppointmentReport = () => {
     const [selectedTab, setSelectedTab] = useState('');
     const [openModal, setOpenModal] = useState(false);
@@ -47,7 +47,7 @@ const CancelAppointmentReport = () => {
         const getTodayClinic = GEtReportClinicSheduleToday();
         if (getTodayClinic) {
             getTodayClinic.then((data) => {
-                console.log(data?.data, "Clinic Schedule")
+                // console.log(data?.data, "Clinic Schedule")
                 setPatientSData(data.data || []);
             });
         }
@@ -57,7 +57,7 @@ const CancelAppointmentReport = () => {
         const allDoc = GetAllUSers();
         if (allDoc) {
             allDoc.then((data) => {
-                console.log(data?.result, "ALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLlll");
+                // console.log(data?.result, "ALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLlll");
                 setPost(data?.result);
             });
         }
@@ -66,7 +66,7 @@ const CancelAppointmentReport = () => {
         // Implement the API call here with the filter criteria (startDate, endDate, selectedDoctor)
         // Update the 'filteredData' state with the fetched data
         let token = Cookies.get("clinic")
-        console.log(token, "This Is token for all Api's")
+        // console.log(token, "This Is token for all Api's")
         // Example API call (make sure to replace this with your actual API endpoint and logic)
         fetch(`${Url}/api/cancel_appointment_report`, {
             method: 'POST',
@@ -84,7 +84,7 @@ const CancelAppointmentReport = () => {
         })
             .then(response => response.json())
             .then(result => {
-                console.log(result, "99999999999999999999999999999");
+                // console.log(result, "99999999999999999999999999999");
                 // Update the 'filteredData' state with the fetched data
                 setFilteredData(result?.result || []);
             })

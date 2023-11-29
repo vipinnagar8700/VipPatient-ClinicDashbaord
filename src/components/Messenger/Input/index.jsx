@@ -65,15 +65,15 @@ const Input = ({ elRef, user, getAllChat }) => {
 
     const ClinicID = parsedData?.clinic_id;
     const ValueID = parsedData?.id;
-    console.log(ClinicID, "This IS Clinic  ID")
-    console.log(ValueID, "This IS Clinic Single ID")
+    // console.log(ClinicID, "This IS Clinic  ID")
+    // console.log(ValueID, "This IS Clinic Single ID")
 
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
         let token = Cookies.get("clinic")
-        console.log(token, "This Is token for all Api's")
+        // console.log(token, "This Is token for all Api's")
         var myHeaders = new Headers();
         myHeaders.append("Accept", "application/json");
         myHeaders.append("Authorization", `Bearer ${token}`);
