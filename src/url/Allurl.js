@@ -1,2 +1,2 @@
-const Url = "https://medical.skyerth.com";
+const Url = "https://app.vip-patient.com";
 export default Url;
